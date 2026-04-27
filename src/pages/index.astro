@@ -1,18 +1,85 @@
 ---
-const restaurantName = "올드밀";
-const since = 2015; // 실제 오픈 연도로 바꾸기
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const since = 2015;
 const yearsRunning = new Date().getFullYear() - since;
 ---
 
-<html lang="ko">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{restaurantName} - 충남 아산</title>
-	</head>
-	<body style="font-family: sans-serif; max-width: 800px; margin: 2rem auto; padding: 1rem;">
-		<h1>{restaurantName}</h1>
-		<p>충남 아산에서 {yearsRunning}년째 가족과 함께하는 공간. (테스트 수정)</p>
-		<p>돌잔치 · 스몰웨딩 · 피자체험 · 일반식사</p>
-	</body>
-</html>
+<BaseLayout title="THE OLD MILL · 충남 아산 가족 레스토랑">
+	<section class="max-w-6xl mx-auto px-6 pt-20 pb-32 text-center">
+		<p class="font-serif text-accent text-lg mb-4">Since 2015 · Asan, Korea</p>
+		<h1 class="font-serif text-5xl md:text-7xl font-semibold leading-tight mb-6">
+			당신을 위한<br />행복한 시간
+		</h1>
+		<p class="text-muted text-lg max-w-xl mx-auto leading-relaxed">
+			충남 아산에서 {yearsRunning}년째,<br />
+			가족의 중요한 순간을 함께해온 공간입니다.
+		</p>
+		<div class="mt-10 flex gap-3 justify-center">
+			<a href="/contact" class="bg-cta text-white px-8 py-3 rounded-full hover:bg-accent transition-colors">
+				예약 문의
+			</a>
+			<a href="/space" class="border border-cta text-cta px-8 py-3 rounded-full hover:bg-cta hover:text-white transition-colors">
+				공간 둘러보기
+			</a>
+		</div>
+	</section>
+
+	<section class="max-w-6xl mx-auto px-6 pb-32">
+		<h2 class="font-serif text-3xl md:text-4xl text-center mb-16">
+			올드밀의 특별한 시간
+		</h2>
+		<div class="grid md:grid-cols-3 gap-8">
+			<a href="/events/doljanchi" class="group">
+				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
+					<div class="w-full h-full flex items-center justify-center text-muted">
+						돌잔치 이미지
+					</div>
+				</div>
+				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">돌잔치</h3>
+				<p class="text-muted text-sm leading-relaxed">
+					아이의 첫 생일을 가족과 함께. 1층 전용홀에서 진행되는 프리미엄 돌잔치 패키지.
+				</p>
+			</a>
+
+			<a href="/events/wedding" class="group">
+				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
+					<div class="w-full h-full flex items-center justify-center text-muted">
+						스몰웨딩 이미지
+					</div>
+				</div>
+				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">스몰웨딩</h3>
+				<p class="text-muted text-sm leading-relaxed">
+					1층 홀 또는 3층 A·B룸에서. 가까운 사람들과 함께하는 따뜻한 결혼식.
+				</p>
+			</a>
+
+			<a href="/events/pizza-class" class="group">
+				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
+					<div class="w-full h-full flex items-center justify-center text-muted">
+						피자체험 이미지
+					</div>
+				</div>
+				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">피자체험</h3>
+				<p class="text-muted text-sm leading-relaxed">
+					아이들이 직접 만드는 화덕 피자. 단체 예약 및 생일파티 가능.
+				</p>
+			</a>
+		</div>
+	</section>
+
+	<section class="bg-cta text-white">
+		<div class="max-w-6xl mx-auto px-6 py-20 text-center">
+			<h2 class="font-serif text-3xl md:text-4xl mb-6">
+				가까운 곳에 있습니다
+			</h2>
+			<p class="text-white/70 mb-8 leading-relaxed">
+				충남 아산시 · 매일 11:00 - 21:30 운영<br />
+				예약 문의는 전화 또는 온라인으로
+			</p>
+			<a href="tel:041-546-1080" class="inline-block bg-white text-cta px-8 py-3 rounded-full hover:bg-bg transition-colors">
+				041-546-1080
+			</a>
+		</div>
+	</section>
+</BaseLayout>

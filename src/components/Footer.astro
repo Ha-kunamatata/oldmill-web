@@ -1,0 +1,43 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-border-warm mt-32 bg-bg">
+	<div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8 text-sm">
+		<div>
+			<div class="font-serif text-xl font-semibold mb-3">THE OLD MILL</div>
+			<p class="text-muted leading-relaxed">
+				충남 아산의 가족 레스토랑.<br />
+				돌잔치 · 스몰웨딩 · 피자체험 · 일반식사
+			</p>
+		</div>
+
+		<div>
+			<div class="font-semibold mb-3">방문 안내</div>
+			<ul class="text-muted space-y-1.5">
+				<li>운영시간: 11:00 - 21:30</li>
+				<li>라스트오더: 점심 15:00 / 저녁 20:30</li>
+				<li>평일·주말 동일 적용</li>
+			</ul>
+		</div>
+
+		<div>
+			<div class="font-semibold mb-3">예약 및 문의</div>
+			<ul class="text-muted space-y-1.5">
+				<li>전화: 041-546-1080</li>
+				<li>주소: 충남 아산시 (상세 주소)</li>
+				<li><a href="/contact" class="underline hover:text-ink">예약 문의 페이지</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="border-t border-border-warm">
+		<div class="max-w-6xl mx-auto px-6 py-6 text-xs text-muted flex flex-col md:flex-row justify-between gap-2">
+			<div>© {currentYear} The Old Mill. All rights reserved.</div>
+			<div class="flex gap-4">
+				<a href="/privacy" class="hover:text-ink">개인정보처리방침</a>
+				<a href="/terms" class="hover:text-ink">이용약관</a>
+			</div>
+		</div>
+	</div>
+</footer>
