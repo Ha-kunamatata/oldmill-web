@@ -1,0 +1,18 @@
+---
+const restaurantName = "올드밀";
+const since = 2015; // 실제 오픈 연도로 바꾸기
+const yearsRunning = new Date().getFullYear() - since;
+---
+
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{restaurantName} - 충남 아산</title>
+	</head>
+	<body style="font-family: sans-serif; max-width: 800px; margin: 2rem auto; padding: 1rem;">
+		<h1>{restaurantName}</h1>
+		<p>충남 아산에서 {yearsRunning}년째 가족과 함께하는 공간.</p>
+		<p>돌잔치 · 스몰웨딩 · 피자체험 · 일반식사</p>
+	</body>
+</html>
