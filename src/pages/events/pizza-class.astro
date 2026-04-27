@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+---
+
+<BaseLayout title="피자체험 · THE OLD MILL" description="아이들이 직접 만드는 화덕 피자 체험">
+	<PageHero
+		eyebrow="PIZZA CLASS"
+		title="아이들이 직접 만드는<br/>화덕 피자"
+		subtitle="반죽부터 토핑까지 아이가 직접 만들고, 화덕에서 구워 먹는 특별한 경험."
+	/>
+
+	<Section title="이런 분들께 추천합니다">
+		<ul class="space-y-3 text-lg">
+			<li class="flex gap-3"><span class="text-accent">·</span> 어린이 생일파티</li>
+			<li class="flex gap-3"><span class="text-accent">·</span> 유치원 / 어린이집 체험학습</li>
+			<li class="flex gap-3"><span class="text-accent">·</span> 가족 단위 주말 체험</li>
+			<li class="flex gap-3"><span class="text-accent">·</span> 단체 모임 (10명 이상)</li>
+		</ul>
+	</Section>
+
+	<Section title="진행 시간 및 인원">
+		<div class="grid md:grid-cols-2 gap-6">
+			<div class="border border-border-warm rounded-lg p-6">
+				<div class="text-sm text-muted mb-1">소요 시간</div>
+				<div class="font-semibold text-lg">약 60-90분</div>
+			</div>
+			<div class="border border-border-warm rounded-lg p-6">
+				<div class="text-sm text-muted mb-1">권장 인원</div>
+				<div class="font-semibold text-lg">최소 ○명 ~ 최대 ○명</div>
+			</div>
+		</div>
+		<p class="text-muted text-sm mt-6">※ 자세한 이용료와 인원은 문의 바랍니다.</p>
+	</Section>
+
+	<section class="bg-cta text-white">
+		<div class="max-w-4xl mx-auto px-6 py-16 text-center">
+			<h2 class="font-serif text-3xl mb-6">피자체험 예약</h2>
+			<a href="/contact" class="inline-block bg-white text-cta px-8 py-3 rounded-full hover:bg-bg transition-colors">
+				예약 문의하기
+			</a>
+		</div>
+	</section>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+---
+
+<BaseLayout title="3층 A·B룸 · THE OLD MILL" description="프라이빗 스몰웨딩을 위한 3층 A·B룸">
+	<PageHero
+		eyebrow="3RD FLOOR"
+		title="프라이빗한 약속의 시간"
+		subtitle="A룸과 B룸으로 분리된 3층 공간에서, 가까운 사람들과 함께하는 따뜻한 결혼식을 진행합니다."
+	/>
+
+	<Section title="A룸 / B룸">
+		<div class="grid md:grid-cols-2 gap-6">
+			<div class="border border-border-warm rounded-lg p-8">
+				<div class="font-serif text-3xl text-accent mb-3">A</div>
+				<h3 class="font-semibold text-xl mb-3">A룸</h3>
+				<p class="text-muted leading-relaxed">
+					상세 설명을 여기에 추가하세요. 수용 인원, 분위기, 추천 행사 유형 등.
+				</p>
+			</div>
+			<div class="border border-border-warm rounded-lg p-8">
+				<div class="font-serif text-3xl text-accent mb-3">B</div>
+				<h3 class="font-semibold text-xl mb-3">B룸</h3>
+				<p class="text-muted leading-relaxed">
+					상세 설명을 여기에 추가하세요.
+				</p>
+			</div>
+		</div>
+	</Section>
+
+	<section class="bg-cta text-white">
+		<div class="max-w-4xl mx-auto px-6 py-16 text-center">
+			<h2 class="font-serif text-3xl mb-6">스몰웨딩 상담</h2>
+			<a href="/contact" class="inline-block bg-white text-cta px-8 py-3 rounded-full hover:bg-bg transition-colors">
+				문의하기
+			</a>
+		</div>
+	</section>
+</BaseLayout>
