@@ -9,8 +9,8 @@ const navItems = [
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-border-warm">
-	<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+<header id="site-header" class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-transparent transition-all duration-300">
+	<div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between transition-all duration-300" id="header-inner">
 		<a href="/" class="flex items-center gap-2">
 			<span class="font-serif text-xl md:text-2xl font-semibold tracking-wide">THE OLD MILL</span>
 		</a>
@@ -78,6 +78,7 @@ const navItems = [
 </header>
 
 <script>
+	// 모바일 메뉴 토글
 	const toggle = document.getElementById('mobile-menu-toggle');
 	const menu = document.getElementById('mobile-menu');
 	const iconMenu = document.getElementById('icon-menu');
@@ -90,4 +91,24 @@ const navItems = [
 		iconClose?.classList.toggle('hidden');
 		toggle.setAttribute('aria-expanded', String(!isOpen));
 	});
+
+	// 헤더 스크롤 반응
+	const header = document.getElementById('site-header');
+	const inner = document.getElementById('header-inner');
+	let lastScroll = 0;
+
+	const handleScroll = () => {
+		const scrollY = window.scrollY;
+		if (scrollY > 20) {
+			header?.classList.add('header-scrolled');
+			inner?.classList.add('header-inner-scrolled');
+		} else {
+			header?.classList.remove('header-scrolled');
+			inner?.classList.remove('header-inner-scrolled');
+		}
+		lastScroll = scrollY;
+	};
+
+	window.addEventListener('scroll', handleScroll, { passive: true });
+	handleScroll();
 </script>

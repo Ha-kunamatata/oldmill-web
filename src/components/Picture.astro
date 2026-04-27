@@ -3,7 +3,7 @@ interface Props {
 	src: string;
 	alt: string;
 	caption?: string;
-	aspectRatio?: '4/5' | '16/9' | '1/1' | '4/3';
+	aspectRatio?: '4/5' | '16/9' | '1/1' | '4/3' | '21/9';
 	loading?: 'lazy' | 'eager';
 }
 
@@ -20,16 +20,18 @@ const aspectClasses = {
 	'16/9': 'aspect-video',
 	'1/1': 'aspect-square',
 	'4/3': 'aspect-[4/3]',
+	'21/9': 'aspect-[21/9]',
 };
 ---
 
 <figure>
-	<div class={`${aspectClasses[aspectRatio]} bg-border-warm rounded-lg overflow-hidden`}>
+	<div class={`${aspectClasses[aspectRatio]} bg-border-warm rounded-lg overflow-hidden relative`}>
 		<img 
 			src={src} 
 			alt={alt}
 			loading={loading}
-			class="w-full h-full object-cover"
+			class="img-fade w-full h-full object-cover"
+			onload="this.classList.add('is-loaded')"
 		/>
 	</div>
 	{caption && (
