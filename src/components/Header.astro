@@ -1,0 +1,93 @@
+---
+const navItems = [
+	{ label: '소개', href: '/about' },
+	{ label: '공간', href: '/space' },
+	{ label: '돌잔치', href: '/events/doljanchi' },
+	{ label: '스몰웨딩', href: '/events/wedding' },
+	{ label: '피자체험', href: '/events/pizza-class' },
+	{ label: '문의', href: '/contact' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-border-warm">
+	<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+		<a href="/" class="flex items-center gap-2">
+			<span class="font-serif text-xl md:text-2xl font-semibold tracking-wide">THE OLD MILL</span>
+		</a>
+		
+		<!-- PC 메뉴 -->
+		<nav class="hidden md:flex items-center gap-8">
+			{navItems.map(item => (
+				<a 
+					href={item.href} 
+					class="text-sm text-muted hover:text-ink transition-colors"
+				>
+					{item.label}
+				</a>
+			))}
+		</nav>
+
+		<a 
+			href="/contact" 
+			class="hidden md:inline-block bg-cta text-white px-5 py-2 rounded-full text-sm hover:bg-accent transition-colors"
+		>
+			예약 문의
+		</a>
+
+		<!-- 모바일 햄버거 버튼 -->
+		<button 
+			id="mobile-menu-toggle"
+			class="md:hidden p-2"
+			aria-label="메뉴 열기"
+			aria-expanded="false"
+		>
+			<svg id="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<line x1="3" y1="6" x2="21" y2="6" />
+				<line x1="3" y1="12" x2="21" y2="12" />
+				<line x1="3" y1="18" x2="21" y2="18" />
+			</svg>
+			<svg id="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden">
+				<line x1="18" y1="6" x2="6" y2="18" />
+				<line x1="6" y1="6" x2="18" y2="18" />
+			</svg>
+		</button>
+	</div>
+
+	<!-- 모바일 메뉴 (슬라이드 다운) -->
+	<nav 
+		id="mobile-menu"
+		class="md:hidden hidden border-t border-border-warm bg-bg"
+	>
+		<div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
+			{navItems.map(item => (
+				<a 
+					href={item.href} 
+					class="py-3 text-base text-ink hover:text-accent transition-colors border-b border-border-warm last:border-b-0"
+				>
+					{item.label}
+				</a>
+			))}
+			<a 
+				href="/contact" 
+				class="mt-4 bg-cta text-white px-5 py-3 rounded-full text-sm text-center hover:bg-accent transition-colors"
+			>
+				예약 문의
+			</a>
+		</div>
+	</nav>
+</header>
+
+<script>
+	const toggle = document.getElementById('mobile-menu-toggle');
+	const menu = document.getElementById('mobile-menu');
+	const iconMenu = document.getElementById('icon-menu');
+	const iconClose = document.getElementById('icon-close');
+
+	toggle?.addEventListener('click', () => {
+		const isOpen = !menu?.classList.contains('hidden');
+		menu?.classList.toggle('hidden');
+		iconMenu?.classList.toggle('hidden');
+		iconClose?.classList.toggle('hidden');
+		toggle.setAttribute('aria-expanded', String(!isOpen));
+	});
+</script>

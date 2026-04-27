@@ -24,6 +24,17 @@ const yearsRunning = new Date().getFullYear() - since;
 			</a>
 		</div>
 	</section>
+	
+	<!-- 히어로 풀폭 이미지 -->
+	<section class="w-full mb-32">
+		<div class="aspect-[16/9] md:aspect-[21/9] bg-border-warm overflow-hidden">
+			<img 
+				src="/images/hero/main.jpg" 
+				alt="올드밀 외관 또는 메인 공간"
+				class="w-full h-full object-cover"
+			/>
+		</div>
+	</section>
 
 	<section class="max-w-6xl mx-auto px-6 pb-32">
 		<h2 class="font-serif text-3xl md:text-4xl text-center mb-16">
@@ -32,9 +43,12 @@ const yearsRunning = new Date().getFullYear() - since;
 		<div class="grid md:grid-cols-3 gap-8">
 			<a href="/events/doljanchi" class="group">
 				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
-					<div class="w-full h-full flex items-center justify-center text-muted">
-						돌잔치 이미지
-					</div>
+					<img 
+						src="/images/events/doljanchi-cover.jpg" 
+						alt="돌잔치 진행 모습"
+						loading="lazy"
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+	                />
 				</div>
 				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">돌잔치</h3>
 				<p class="text-muted text-sm leading-relaxed">
@@ -44,9 +58,12 @@ const yearsRunning = new Date().getFullYear() - since;
 
 			<a href="/events/wedding" class="group">
 				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
-					<div class="w-full h-full flex items-center justify-center text-muted">
-						스몰웨딩 이미지
-					</div>
+					<img 
+						src="/images/events/wedding-cover.jpg" 
+						alt="스몰웨딩 진행 모습"
+						loading="lazy"
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+	                />
 				</div>
 				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">스몰웨딩</h3>
 				<p class="text-muted text-sm leading-relaxed">
@@ -56,9 +73,12 @@ const yearsRunning = new Date().getFullYear() - since;
 
 			<a href="/events/pizza-class" class="group">
 				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
-					<div class="w-full h-full flex items-center justify-center text-muted">
-						피자체험 이미지
-					</div>
+					<img 
+						src="/images/events/pizza-cover.jpg" 
+						alt="피자체험 진행 모습"
+						loading="lazy"
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+	                />
 				</div>
 				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">피자체험</h3>
 				<p class="text-muted text-sm leading-relaxed">

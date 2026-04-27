@@ -1,0 +1,40 @@
+---
+interface Props {
+	src: string;
+	alt: string;
+	caption?: string;
+	aspectRatio?: '4/5' | '16/9' | '1/1' | '4/3';
+	loading?: 'lazy' | 'eager';
+}
+
+const { 
+	src, 
+	alt, 
+	caption,
+	aspectRatio = '4/3',
+	loading = 'lazy'
+} = Astro.props;
+
+const aspectClasses = {
+	'4/5': 'aspect-[4/5]',
+	'16/9': 'aspect-video',
+	'1/1': 'aspect-square',
+	'4/3': 'aspect-[4/3]',
+};
+---
+
+<figure>
+	<div class={`${aspectClasses[aspectRatio]} bg-border-warm rounded-lg overflow-hidden`}>
+		<img 
+			src={src} 
+			alt={alt}
+			loading={loading}
+			class="w-full h-full object-cover"
+		/>
+	</div>
+	{caption && (
+		<figcaption class="text-sm text-muted mt-3 text-center">
+			{caption}
+		</figcaption>
+	)}
+</figure>
