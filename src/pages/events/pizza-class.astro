@@ -55,7 +55,7 @@ const faqs = [
 	<section class="w-full mb-24 reveal">
 		<div class="max-w-6xl mx-auto px-6">
 			<SmartImage 
-				src="/images/events/pizza-hero.jpg"
+				src="/images/events/pizza-cover.jpg"
 				alt="피자체험 진행 모습"
 				aspectRatio="21/9"
 				rounded="2xl"
@@ -102,7 +102,7 @@ const faqs = [
 		<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 reveal-stagger">
 			{[1,2,3,4,5,6].map(i => (
 				<SmartImage 
-					src={`/images/events/pizza/pizza-${String(i).padStart(2,'0')}.jpg`}
+					src={`/images/events/pizza-${String(i).padStart(2,'0')}.jpg`}
 					alt={`피자체험 사진 ${i}`}
 					aspectRatio="1/1"
 					rounded="lg"
