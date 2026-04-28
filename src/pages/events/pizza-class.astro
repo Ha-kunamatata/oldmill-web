@@ -3,50 +3,136 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
 import CTASection from '../../components/CTASection.astro';
+import FAQ from '../../components/FAQ.astro';
+import InfoCard from '../../components/InfoCard.astro';
+import SmartImage from '../../components/SmartImage.astro';
 
 const targets = [
-	'어린이 생일파티',
-	'유치원 / 어린이집 체험학습',
-	'가족 단위 주말 체험',
-	'단체 모임 (10명 이상)',
+	{ icon: '🎂', title: '어린이 생일파티', desc: '아이의 친구들을 초대하는 특별한 생일' },
+	{ icon: '🏫', title: '유치원 / 어린이집', desc: '체험학습, 단체 활동' },
+	{ icon: '👨‍👩‍👧', title: '가족 단위', desc: '주말 가족 시간, 부모님과 함께' },
+	{ icon: '👥', title: '단체 모임', desc: '10명 이상 단체 예약' },
+];
+
+const flow = [
+	{ step: '01', title: '반죽 만들기', desc: '직접 밀가루를 만지고 반죽을 누르며 피자 도우를 만들어요.' },
+	{ step: '02', title: '소스 바르기', desc: '도우 위에 토마토 소스를 골고루 펴 발라요.' },
+	{ step: '03', title: '토핑 올리기', desc: '치즈, 햄, 채소 등 좋아하는 토핑을 마음껏 올려요.' },
+	{ step: '04', title: '화덕에서 굽기', desc: '진짜 화덕에서 노릇하게 구워진 피자를 함께 먹어요.' },
+];
+
+const faqs = [
+	{
+		q: '몇 살부터 참여할 수 있나요?',
+		a: '4세 이상부터 참여 가능합니다. 5~7세 아이들이 가장 즐겁게 참여하며, 유아의 경우 부모님과 함께 진행하시면 좋습니다.',
+	},
+	{
+		q: '인원이 적은데 가능한가요?',
+		a: '체험 프로그램은 최소 인원 기준이 있습니다. 정확한 기준은 문의 시 안내드립니다.',
+	},
+	{
+		q: '재료에 알레르기가 있는데요?',
+		a: '미리 말씀해 주시면 가능한 한 재료를 조정해 드립니다. 우유·계란·견과류 등 주요 알레르기는 사전에 알려주세요.',
+	},
+	{
+		q: '체험 중 사진 촬영이 가능한가요?',
+		a: '물론입니다. 아이들의 즐거운 순간을 자유롭게 촬영하실 수 있습니다.',
+	},
+	{
+		q: '체험 외에 식사도 가능한가요?',
+		a: '체험으로 만든 피자는 그 자리에서 함께 드시고, 추가로 다른 메뉴 주문도 가능합니다.',
+	},
 ];
 ---
 
-<BaseLayout title="피자체험 · THE OLD MILL" description="아이들이 직접 만드는 화덕 피자 체험">
+<BaseLayout title="피자체험 · THE OLD MILL" description="아이들이 직접 만드는 화덕 피자 체험 프로그램">
 	<PageHero
-		eyebrow="PIZZA CLASS"
+		eyebrow="PIZZA CLASS · 피자체험"
 		title="아이들이 직접 만드는<br/>화덕 피자"
-		subtitle="반죽부터 토핑까지 아이가 직접 만들고, 화덕에서 구워 먹는 특별한 경험."
+		subtitle="반죽부터 토핑까지 아이가 직접 만들고, 진짜 화덕에서 구워 먹는 특별한 경험."
 	/>
 
+	<section class="w-full mb-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<SmartImage 
+				src="/images/events/pizza-hero.jpg"
+				alt="피자체험 진행 모습"
+				aspectRatio="21/9"
+				rounded="2xl"
+				label="피자체험 진행 모습"
+			/>
+		</div>
+	</section>
+
 	<Section eyebrow="FOR" title="이런 분들께 추천합니다">
-		<ul class="space-y-4">
+		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 reveal-stagger">
 			{targets.map(t => (
-				<li class="flex gap-4 items-start text-lg">
-					<span class="text-accent text-2xl leading-none">·</span>
-					<span>{t}</span>
-				</li>
+				<div class="card-bordered p-7 text-center">
+					<div class="text-4xl mb-4">{t.icon}</div>
+					<h3 class="font-medium text-lg mb-2">{t.title}</h3>
+					<p class="text-muted text-sm leading-relaxed">{t.desc}</p>
+				</div>
 			))}
-		</ul>
+		</div>
 	</Section>
 
-	<Section eyebrow="DETAILS" title="진행 시간 및 인원">
-		<div class="grid md:grid-cols-2 gap-4">
-			<div class="card-bordered p-6">
-				<div class="text-sm text-muted mb-2">소요 시간</div>
-				<div class="font-medium text-xl">약 60–90분</div>
+	<section class="bg-bg-soft py-24 md:py-32 reveal">
+		<div class="max-w-5xl mx-auto px-6">
+			<div class="text-center mb-16">
+				<p class="text-eyebrow mb-4">EXPERIENCE</p>
+				<h2 class="text-headline">체험은 이렇게 진행돼요</h2>
 			</div>
-			<div class="card-bordered p-6">
-				<div class="text-sm text-muted mb-2">권장 인원</div>
-				<div class="font-medium text-xl">최소 ○명 — 최대 ○명</div>
+			<div class="grid md:grid-cols-2 gap-6 md:gap-8 reveal-stagger">
+				{flow.map(f => (
+					<div class="card-bordered p-8 bg-bg">
+						<div class="font-serif text-3xl text-accent mb-3">{f.step}</div>
+						<h3 class="font-medium text-xl mb-3">{f.title}</h3>
+						<p class="text-muted leading-relaxed text-sm">{f.desc}</p>
+					</div>
+				))}
 			</div>
 		</div>
-		<p class="text-muted text-sm mt-6">※ 자세한 이용료와 인원은 문의 바랍니다.</p>
-	</Section>
+	</section>
+
+	<section class="max-w-6xl mx-auto px-6 py-20 md:py-24 reveal">
+		<div class="text-center mb-12">
+			<p class="text-eyebrow mb-4">MOMENTS</p>
+			<h2 class="text-headline">아이들의 즐거운 시간</h2>
+		</div>
+		<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 reveal-stagger">
+			{[1,2,3,4,5,6].map(i => (
+				<SmartImage 
+					src={`/images/events/pizza-${String(i).padStart(2,'0')}.jpg`}
+					alt={`피자체험 사진 ${i}`}
+					aspectRatio="1/1"
+					rounded="lg"
+					label={`체험 ${i}`}
+					hover
+				/>
+			))}
+		</div>
+	</section>
+
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-5xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-4">INFO</p>
+				<h2 class="text-headline">한눈에 보기</h2>
+			</div>
+			<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+				<InfoCard label="소요 시간" value="60 — 90분" hint="체험 + 식사 포함" />
+				<InfoCard label="권장 인원" value="○명 — ○명" hint="단체 별도 문의" />
+				<InfoCard label="대상 연령" value="4세 이상" hint="유아는 보호자 동반" />
+			</div>
+		</div>
+	</section>
+
+	<FAQ items={faqs} />
 
 	<CTASection 
-		title="피자체험 예약"
+		title="아이의 잊을 수 없는<br/>오후를 만들어 보세요"
 		description="단체 예약 시 메뉴와 진행 방식을 맞춤으로 안내드립니다."
-		buttonLabel="예약 문의하기"
+		buttonLabel="피자체험 예약"
+		phone="041-546-1080"
 	/>
 </BaseLayout>

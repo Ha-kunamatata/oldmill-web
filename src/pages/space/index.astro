@@ -2,28 +2,35 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTASection from '../../components/CTASection.astro';
+import SmartImage from '../../components/SmartImage.astro';
 
 const floors = [
 	{
 		floor: '1F',
 		eyebrow: 'EVENT HALL',
 		title: '돌잔치 · 피자체험 · 스몰웨딩 홀',
-		description: '아이의 첫 생일과 작은 결혼식, 그리고 어린이 피자체험까지 진행되는 메인 이벤트 홀입니다.',
+		description: '아이의 첫 생일과 작은 결혼식, 그리고 어린이 피자체험까지 진행되는 메인 이벤트 홀입니다. 행사 전체가 가족만의 시간이 되도록 단독으로 운영됩니다.',
+		features: ['단독 운영 가능', '데코레이션 세팅', '주차 안내'],
 		href: '/space/1f-hall',
+		image: '/images/space/1f-overview.jpg',
 	},
 	{
 		floor: '2F',
 		eyebrow: 'MAIN DINING',
 		title: '일반 식사 (16 테이블)',
-		description: '진입층(GR층)에 위치한 메인 다이닝. 16개 테이블 규모로 가족 모임과 일상 식사에 적합합니다.',
+		description: '진입층(GR층)에 위치한 메인 다이닝. 16개 테이블 규모로 가족 모임과 일상 식사에 적합한 편안한 공간입니다.',
+		features: ['16 테이블', '예약 가능', '단체 식사'],
 		href: '/space/2f-dining',
+		image: '/images/space/2f-overview.jpg',
 	},
 	{
 		floor: '3F',
 		eyebrow: 'PRIVATE ROOMS',
 		title: '스몰웨딩 A · B룸',
-		description: 'A룸과 B룸으로 분리된 프라이빗 공간. 가까운 사람들과의 따뜻한 결혼식을 위한 공간입니다.',
+		description: 'A룸과 B룸으로 분리된 프라이빗 공간. 가까운 사람들과의 따뜻한 결혼식, 또는 비즈니스 미팅·소규모 모임에 적합합니다.',
+		features: ['A룸 / B룸 선택', '프라이빗 진행', '룸 단독 사용'],
 		href: '/space/3f-rooms',
+		image: '/images/space/3f-overview.jpg',
 	},
 ];
 ---
@@ -35,26 +42,80 @@ const floors = [
 		subtitle="용도에 맞게 설계된 단독 건물. 각 층마다 다른 분위기와 목적을 가진 공간을 만나보세요."
 	/>
 
-	<section class="max-w-5xl mx-auto px-6 pb-20 space-y-6 reveal-stagger">
-		{floors.map(f => (
-			<a href={f.href} class="card-bordered p-8 md:p-12 block group">
-				<div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-					<div class="md:w-32 shrink-0">
-						<p class="text-eyebrow text-xs mb-2">{f.eyebrow}</p>
-						<div class="font-serif text-6xl md:text-7xl text-accent group-hover:translate-x-1 transition-transform duration-500">
+	<section class="w-full mb-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<SmartImage 
+				src="/images/space/building-exterior.jpg"
+				alt="올드밀 건물 외관"
+				aspectRatio="21/9"
+				rounded="2xl"
+				label="올드밀 건물 외관"
+			/>
+		</div>
+	</section>
+
+	<section class="max-w-6xl mx-auto px-6 pb-20 space-y-16 md:space-y-24">
+		{floors.map((f, i) => (
+			<a href={f.href} class="block group reveal">
+				<div class={`grid md:grid-cols-2 gap-8 md:gap-12 items-center ${i % 2 === 1 ? 'md:[direction:rtl]' : ''}`}>
+					<div class={i % 2 === 1 ? 'md:[direction:ltr]' : ''}>
+						<SmartImage 
+							src={f.image}
+							alt={`${f.floor} ${f.title}`}
+							aspectRatio="4/3"
+							rounded="2xl"
+							label={`${f.floor} 공간 사진`}
+							hover
+						/>
+					</div>
+					<div class={i % 2 === 1 ? 'md:[direction:ltr]' : ''}>
+						<p class="text-eyebrow mb-3 text-xs">{f.eyebrow}</p>
+						<div class="font-serif text-6xl md:text-7xl text-accent mb-6 leading-none group-hover:translate-x-1 transition-transform duration-500">
 							{f.floor}
 						</div>
-					</div>
-					<div class="flex-1">
-						<h3 class="font-serif text-2xl md:text-3xl mb-3 group-hover:text-accent transition-colors">
+						<h3 class="font-serif text-2xl md:text-3xl mb-4 group-hover:text-accent transition-colors">
 							{f.title}
 						</h3>
-						<p class="text-muted leading-relaxed">{f.description}</p>
+						<p class="text-muted leading-relaxed mb-6">{f.description}</p>
+						<ul class="space-y-2 mb-8">
+							{f.features.map(feat => (
+								<li class="flex gap-3 items-center text-sm">
+									<span class="w-1 h-1 bg-accent rounded-full"></span>
+									<span>{feat}</span>
+								</li>
+							))}
+						</ul>
+						<span class="link-underline text-sm font-medium">자세히 보기 →</span>
 					</div>
-					<div class="text-accent text-2xl md:text-3xl group-hover:translate-x-2 transition-transform duration-500">→</div>
 				</div>
 			</a>
 		))}
+	</section>
+
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-4">VISIT US</p>
+				<h2 class="text-headline">방문 안내</h2>
+			</div>
+			<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+				<div class="card-bordered p-7 bg-bg">
+					<div class="text-xs text-muted uppercase tracking-wider mb-3">LOCATION</div>
+					<div class="font-medium text-lg mb-2">충남 아산시</div>
+					<p class="text-sm text-muted">상세 주소 안내 예정<br/>주차 가능</p>
+				</div>
+				<div class="card-bordered p-7 bg-bg">
+					<div class="text-xs text-muted uppercase tracking-wider mb-3">HOURS</div>
+					<div class="font-medium text-lg mb-2">매일 11:00 — 21:30</div>
+					<p class="text-sm text-muted">라스트오더 점심 15:00<br/>저녁 20:30</p>
+				</div>
+				<div class="card-bordered p-7 bg-bg">
+					<div class="text-xs text-muted uppercase tracking-wider mb-3">CONTACT</div>
+					<a href="tel:041-546-1080" class="font-medium text-lg mb-2 block hover:text-accent transition-colors">041-546-1080</a>
+					<p class="text-sm text-muted">전화 또는<br/>온라인 문의</p>
+				</div>
+			</div>
+		</div>
 	</section>
 
 	<CTASection 

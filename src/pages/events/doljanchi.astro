@@ -3,62 +3,171 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
 import CTASection from '../../components/CTASection.astro';
+import FAQ from '../../components/FAQ.astro';
+import InfoCard from '../../components/InfoCard.astro';
+import SmartImage from '../../components/SmartImage.astro';
 
 const includes = [
-	'1층 전용 홀 사용',
-	'기본 데코레이션 (테이블/배경)',
-	'코스 메뉴 (인원수 기준)',
-	'음료 / 디저트 세팅',
-	'사회 진행 (선택)',
-	'주차 안내',
+	{ icon: '◆', title: '1층 전용 홀', desc: '행사 시간 동안 단독 사용' },
+	{ icon: '◆', title: '기본 데코레이션', desc: '테마에 맞는 테이블/배경 세팅' },
+	{ icon: '◆', title: '코스 메뉴', desc: '인원수에 맞춘 가족 코스' },
+	{ icon: '◆', title: '음료 / 디저트', desc: '돌상 케이크 별도 안내' },
+	{ icon: '◆', title: '진행 보조', desc: '사회 진행 옵션 (선택)' },
+	{ icon: '◆', title: '주차 안내', desc: '하객 주차 안내 지원' },
 ];
 
 const flow = [
-	{ step: '1', title: '예약 문의', desc: '희망 날짜, 예상 인원을 알려주세요.' },
-	{ step: '2', title: '현장 답사 및 상담', desc: '공간을 직접 보시고 패키지를 결정합니다.' },
-	{ step: '3', title: '계약 및 진행 준비', desc: '메뉴, 데코, 진행 순서를 확정합니다.' },
-	{ step: '4', title: '행사 당일', desc: '가족과 함께하는 특별한 하루.' },
+	{ step: '01', title: '예약 문의', desc: '희망 날짜와 예상 인원을 알려주세요. 가능 일정을 확인해 드립니다.' },
+	{ step: '02', title: '현장 답사 및 상담', desc: '직접 방문하셔서 공간을 보시고, 패키지·메뉴·진행 방식을 정합니다.' },
+	{ step: '03', title: '계약 및 진행 준비', desc: '메뉴, 데코, 진행 순서를 확정하고 행사 D-Day까지 함께 준비합니다.' },
+	{ step: '04', title: '행사 당일', desc: '아이의 첫 생일, 가족과 함께하는 특별한 하루를 만들어 드립니다.' },
+];
+
+const faqs = [
+	{
+		q: '몇 명까지 가능한가요?',
+		a: '1층 전용 홀 기준 최대 ○○명까지 진행 가능합니다. 정확한 수용 인원은 행사 형태(테이블 배치, 무대 유무 등)에 따라 달라지므로, 상담 시 안내해드립니다.',
+	},
+	{
+		q: '돌상은 어떻게 준비되나요?',
+		a: '돌상 대여 업체와 협력하여 진행해 드리거나, 가족분이 직접 준비하신 돌상을 세팅해 드립니다. 상담 시 선호하시는 방식을 알려주세요.',
+	},
+	{
+		q: '돌잡이 진행이 가능한가요?',
+		a: '네, 가능합니다. 돌잡이용 물품은 직접 준비하셔도 되고, 저희 쪽에서 안내드릴 수 있는 옵션도 있습니다.',
+	},
+	{
+		q: '평일과 주말 가격이 다른가요?',
+		a: '평일/주말, 시간대에 따라 패키지 가격이 달라질 수 있습니다. 정확한 견적은 날짜와 인원 알려주시면 안내해 드립니다.',
+	},
+	{
+		q: '취소 / 변경은 어떻게 하나요?',
+		a: '예약금 입금 후의 취소·변경 정책은 계약서에 명시되어 있습니다. 일정 변경은 가능한 빨리 연락주시면 최대한 협조해 드립니다.',
+	},
+	{
+		q: '하객 주차는 가능한가요?',
+		a: '건물 자체 주차 공간이 있으며, 행사 인원에 따라 추가 안내를 도와드립니다.',
+	},
 ];
 ---
 
-<BaseLayout title="돌잔치 · THE OLD MILL" description="아산 돌잔치, 올드밀 1층 전용 홀에서">
+<BaseLayout title="돌잔치 · THE OLD MILL" description="아산 돌잔치, 올드밀 1층 전용 홀에서 진행하는 프리미엄 돌잔치 패키지">
 	<PageHero
-		eyebrow="DOLJANCHI"
+		eyebrow="DOLJANCHI · 돌잔치"
 		title="아이의 첫 생일,<br/>가족의 잊지 못할 하루"
 		subtitle="1층 전용 홀에서 진행되는 프리미엄 돌잔치. 가족만의 시간이 되도록 세심하게 준비합니다."
 	/>
 
+	<section class="w-full mb-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<SmartImage 
+				src="/images/events/doljanchi-hero.jpg"
+				alt="돌잔치 진행 모습"
+				aspectRatio="21/9"
+				rounded="2xl"
+				label="돌잔치 진행 모습"
+			/>
+		</div>
+	</section>
+
+	<Section eyebrow="WHY OLDMILL" title="왜 올드밀에서<br/>돌잔치를 할까요?">
+		<div class="grid md:grid-cols-3 gap-6 md:gap-8 mt-4 reveal-stagger">
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">01</div>
+				<h3 class="font-medium text-lg mb-3">단독 운영</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					행사 시간 동안 1층 홀을 통째로 사용합니다. 다른 손님과 섞이지 않는, 가족만의 시간.
+				</p>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">02</div>
+				<h3 class="font-medium text-lg mb-3">10년의 경험</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					{new Date().getFullYear() - 2015}년 동안 수많은 돌잔치를 진행해온 노하우. 진행 흐름이 자연스럽습니다.
+				</p>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">03</div>
+				<h3 class="font-medium text-lg mb-3">맞춤 진행</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					정해진 매뉴얼이 아닌, 가족별로 다른 진행 방식. 원하시는 흐름에 맞춰드립니다.
+				</p>
+			</div>
+		</div>
+	</Section>
+
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-4">GALLERY</p>
+				<h2 class="text-headline">진행된 돌잔치</h2>
+			</div>
+			<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 reveal-stagger">
+				{[1,2,3,4,5,6].map(i => (
+					<SmartImage 
+						src={`/images/events/doljanchi-${String(i).padStart(2,'0')}.jpg`}
+						alt={`돌잔치 사진 ${i}`}
+						aspectRatio="1/1"
+						rounded="lg"
+						label={`돌잔치 ${i}`}
+						hover
+					/>
+				))}
+			</div>
+		</div>
+	</section>
+
 	<Section eyebrow="PACKAGE" title="패키지에 포함되는 것">
-		<div class="grid md:grid-cols-2 gap-x-8 gap-y-4">
+		<div class="grid md:grid-cols-2 gap-4 md:gap-6 reveal-stagger">
 			{includes.map(item => (
-				<div class="flex gap-3 items-start">
-					<span class="text-accent text-xl mt-0.5 shrink-0">✓</span>
-					<span class="text-lg">{item}</span>
+				<div class="card-bordered p-6 flex gap-5 items-start">
+					<div class="font-serif text-2xl text-accent shrink-0 leading-none mt-1">{item.icon}</div>
+					<div>
+						<div class="font-medium text-lg mb-1">{item.title}</div>
+						<p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+					</div>
 				</div>
 			))}
 		</div>
 		<p class="text-muted text-sm mt-10 pt-6 border-t border-border-warm">
-			※ 패키지 구성은 인원·예산에 따라 조정 가능합니다. 자세한 내용은 상담 시 안내드립니다.
+			※ 패키지 구성과 가격은 인원·날짜·옵션에 따라 조정됩니다. 자세한 견적은 상담 시 안내드립니다.
 		</p>
 	</Section>
 
-	<Section eyebrow="PROCESS" title="진행 흐름">
-		<ol class="space-y-8 reveal-stagger">
-			{flow.map(f => (
-				<li class="flex gap-6">
-					<div class="font-serif text-3xl text-accent w-12 shrink-0 leading-none">{f.step}</div>
-					<div>
-						<div class="font-medium text-lg mb-1">{f.title}</div>
-						<p class="text-muted">{f.desc}</p>
-					</div>
-				</li>
-			))}
-		</ol>
+	<section class="bg-bg-soft py-24 md:py-32 reveal">
+		<div class="max-w-4xl mx-auto px-6">
+			<div class="text-center mb-16">
+				<p class="text-eyebrow mb-4">PROCESS</p>
+				<h2 class="text-headline">진행 흐름</h2>
+			</div>
+			<ol class="space-y-12 reveal-stagger">
+				{flow.map(f => (
+					<li class="grid md:grid-cols-[6rem_1fr] gap-6 md:gap-10 items-start">
+						<div class="font-serif text-4xl md:text-5xl text-accent leading-none">{f.step}</div>
+						<div class="md:pt-1">
+							<div class="font-medium text-xl mb-3">{f.title}</div>
+							<p class="text-muted leading-relaxed">{f.desc}</p>
+						</div>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<Section eyebrow="AT A GLANCE" title="한눈에 보기">
+		<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+			<InfoCard label="권장 인원" value="○○명 — ○○명" hint="패키지에 따라 조정 가능" />
+			<InfoCard label="소요 시간" value="약 2시간" hint="진행 방식에 따라 ±30분" />
+			<InfoCard label="예약 시점" value="2~3개월 전 권장" hint="주말은 더 일찍 예약 필요" />
+		</div>
 	</Section>
 
+	<FAQ items={faqs} />
+
 	<CTASection 
-		title="먼저 일정부터 확인해 보세요"
-		description="원하시는 날짜의 가용 여부를 빠르게 확인해드립니다."
+		title="먼저 일정부터<br/>확인해 보세요"
+		description="원하시는 날짜의 가용 여부를 빠르게 확인해드립니다. 부담 없이 문의해 주세요."
 		buttonLabel="돌잔치 문의하기"
+		phone="041-546-1080"
 	/>
 </BaseLayout>

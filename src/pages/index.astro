@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTASection from '../components/CTASection.astro';
+import SmartImage from '../components/SmartImage.astro';
 
 const since = 2015;
 const yearsRunning = new Date().getFullYear() - since;
@@ -37,7 +38,6 @@ const floors = [
 ---
 
 <BaseLayout title="THE OLD MILL · 충남 아산 가족 레스토랑">
-	<!-- HERO -->
 	<section class="max-w-6xl mx-auto px-6 pt-20 md:pt-32 pb-16 md:pb-24 text-center reveal">
 		<p class="text-eyebrow mb-6">Since {since} · Asan, Korea</p>
 		<h1 class="text-display mb-8">
@@ -53,7 +53,6 @@ const floors = [
 		</div>
 	</section>
 
-	<!-- HERO IMAGE -->
 	<section class="w-full mb-24 md:mb-32 reveal">
 		<div class="aspect-[16/9] md:aspect-[21/9] bg-border-warm overflow-hidden">
 			<img 
@@ -65,7 +64,6 @@ const floors = [
 		</div>
 	</section>
 
-	<!-- ABOUT PREVIEW -->
 	<section class="max-w-4xl mx-auto px-6 mb-32 text-center reveal">
 		<p class="text-eyebrow mb-6">ABOUT</p>
 		<h2 class="text-headline mb-8">
@@ -77,15 +75,15 @@ const floors = [
 		</p>
 		<div class="grid grid-cols-3 gap-8 reveal-stagger">
 			<div>
-				<div class="font-serif text-4xl md:text-5xl text-accent mb-2">{yearsRunning}<span class="text-2xl">년</span></div>
+				<div class="text-stat mb-2">{yearsRunning}<span class="text-2xl">년</span></div>
 				<div class="text-sm text-muted">운영 연차</div>
 			</div>
 			<div>
-				<div class="font-serif text-4xl md:text-5xl text-accent mb-2">3<span class="text-2xl">개층</span></div>
+				<div class="text-stat mb-2">3<span class="text-2xl">개층</span></div>
 				<div class="text-sm text-muted">단독 건물</div>
 			</div>
 			<div>
-				<div class="font-serif text-4xl md:text-5xl text-accent mb-2">∞</div>
+				<div class="text-stat mb-2">∞</div>
 				<div class="text-sm text-muted">남겨진 추억</div>
 			</div>
 		</div>
@@ -94,7 +92,6 @@ const floors = [
 		</div>
 	</section>
 
-	<!-- EVENTS -->
 	<section class="max-w-6xl mx-auto px-6 mb-32 reveal">
 		<div class="text-center mb-16">
 			<p class="text-eyebrow mb-4">SPECIAL MOMENTS</p>
@@ -103,15 +100,15 @@ const floors = [
 		<div class="grid md:grid-cols-3 gap-6 md:gap-8 reveal-stagger">
 			{events.map(e => (
 				<a href={e.href} class="group card-hover block">
-					<div class="aspect-[4/5] bg-border-warm rounded-xl mb-5 overflow-hidden relative">
-						<img 
+					<div class="mb-5">
+						<SmartImage 
 							src={e.image}
 							alt={e.title}
-							loading="lazy"
-							class="img-fade w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-							onload="this.classList.add('is-loaded')"
+							aspectRatio="4/5"
+							rounded="xl"
+							label={e.title}
+							hover
 						/>
-						<div class="absolute inset-0 bg-cta/0 group-hover:bg-cta/15 transition-colors duration-500"></div>
 					</div>
 					<p class="text-eyebrow mb-2 text-xs">{e.eyebrow}</p>
 					<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">{e.title}</h3>
@@ -122,7 +119,6 @@ const floors = [
 		</div>
 	</section>
 
-	<!-- SPACE PREVIEW -->
 	<section class="bg-bg-soft py-24 md:py-32 reveal">
 		<div class="max-w-6xl mx-auto px-6">
 			<div class="text-center mb-16">
@@ -146,7 +142,6 @@ const floors = [
 		</div>
 	</section>
 
-	<!-- CTA -->
 	<CTASection 
 		title="가까운 곳에서<br/>기다리고 있습니다"
 		description="충남 아산시에 위치한 올드밀로 직접 방문하시거나, 언제든 전화로 문의해 주세요."

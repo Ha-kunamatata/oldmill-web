@@ -3,9 +3,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import CTASection from '../components/CTASection.astro';
+import SmartImage from '../components/SmartImage.astro';
 
 const since = 2015;
 const yearsRunning = new Date().getFullYear() - since;
+
+const milestones = [
+	{ year: since, title: '올드밀 오픈', desc: '충남 아산에 단독 건물로 시작' },
+	{ year: since + 2, title: '돌잔치 패키지 도입', desc: '가족 행사 전문 공간으로 확장' },
+	{ year: since + 5, title: '스몰웨딩 시작', desc: '3층 A·B룸을 활용한 프라이빗 결혼식' },
+	{ year: since + 7, title: '어린이 피자체험', desc: '아이들을 위한 화덕 피자 프로그램' },
+];
+
+const values = [
+	{
+		icon: '✦',
+		title: '한 곳에서 오래',
+		desc: '10년 넘게 같은 자리에서, 같은 마음으로. 시간이 만든 신뢰가 우리의 자산입니다.',
+	},
+	{
+		icon: '✦',
+		title: '가족의 시간을 위해',
+		desc: '대형 행사장이 줄 수 없는 따뜻함. 정해진 매뉴얼이 아닌, 가족 한 분 한 분에 맞춘 진행.',
+	},
+	{
+		icon: '✦',
+		title: '음식의 본질',
+		desc: '화려한 장식보다, 매일 정성껏 준비하는 식재료. 손님이 먹는 것을 우리도 먹습니다.',
+	},
+];
 ---
 
 <BaseLayout title="소개 · THE OLD MILL" description="충남 아산에서 10년, 올드밀이 걸어온 길">
@@ -14,6 +40,18 @@ const yearsRunning = new Date().getFullYear() - since;
 		title="가족의 순간을<br/>담는 공간"
 		subtitle={`${since}년 충남 아산에 문을 열고, ${yearsRunning}년이 넘는 시간 동안 가족의 가장 중요한 순간들을 함께해왔습니다.`}
 	/>
+
+	<section class="w-full mb-24 md:mb-32 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<SmartImage 
+				src="/images/about/exterior.jpg"
+				alt="올드밀 외관"
+				aspectRatio="21/9"
+				rounded="2xl"
+				label="올드밀 외관"
+			/>
+		</div>
+	</section>
 
 	<Section eyebrow="OUR STORY" title="올드밀의 시작">
 		<div class="space-y-6">
@@ -26,34 +64,98 @@ const yearsRunning = new Date().getFullYear() - since;
 				3층 규모의 단독 건물에서 돌잔치, 스몰웨딩, 가족 식사, 어린이 피자체험까지 — 인생의 다양한 장면들을
 				자연스럽게 담아냅니다.
 			</p>
+			<p class="prose-body">
+				매일 같은 자리에서 손님을 맞이하며, 시간이 흘러도 변하지 않는 가치를 지켜갑니다.
+				올드밀이 추구하는 것은 화려함이 아니라 <strong class="text-ink font-medium">"오래 기억되는 시간"</strong>입니다.
+			</p>
 		</div>
 	</Section>
 
-	<Section eyebrow="VALUES" title="우리가 지키는 것" align="center">
-		<div class="grid md:grid-cols-3 gap-8 mt-4 reveal-stagger">
-			<div class="card-bordered p-8 text-center">
-				<div class="font-serif text-5xl text-accent mb-3">{yearsRunning}+</div>
-				<div class="font-medium mb-2">운영 연차</div>
+	<section class="bg-bg-soft py-24 md:py-32 reveal">
+		<div class="max-w-5xl mx-auto px-6">
+			<div class="text-center mb-16">
+				<p class="text-eyebrow mb-4">OUR VALUES</p>
+				<h2 class="text-headline">우리가 지키는 것</h2>
+			</div>
+			<div class="grid md:grid-cols-3 gap-6 md:gap-8 reveal-stagger">
+				{values.map(v => (
+					<div class="card-bordered p-8 md:p-10 bg-bg">
+						<div class="font-serif text-3xl text-accent mb-4">{v.icon}</div>
+						<h3 class="font-serif text-2xl mb-4">{v.title}</h3>
+						<p class="text-muted leading-relaxed">{v.desc}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<Section eyebrow="BY THE NUMBERS" title="시간이 만든 신뢰" align="center">
+		<div class="grid md:grid-cols-3 gap-8 md:gap-12 mt-8 reveal-stagger">
+			<div class="text-center">
+				<div class="text-stat mb-3">{yearsRunning}+</div>
+				<div class="font-medium text-lg mb-2">운영 연차</div>
 				<p class="text-muted text-sm leading-relaxed">
-					{since}년 시작, 한 곳에서<br/>꾸준히 운영해온 시간
+					{since}년 시작, 한 곳에서 꾸준히
 				</p>
 			</div>
-			<div class="card-bordered p-8 text-center">
-				<div class="font-serif text-5xl text-accent mb-3">3F</div>
-				<div class="font-medium mb-2">단독 건물</div>
+			<div class="text-center">
+				<div class="text-stat mb-3">3F</div>
+				<div class="font-medium text-lg mb-2">단독 건물</div>
 				<p class="text-muted text-sm leading-relaxed">
-					용도별로 분리된 3개 층,<br/>각자의 시간을 위한 공간
+					용도별로 분리된 3개 층
 				</p>
 			</div>
-			<div class="card-bordered p-8 text-center">
-				<div class="font-serif text-5xl text-accent mb-3">∞</div>
-				<div class="font-medium mb-2">남겨진 추억</div>
+			<div class="text-center">
+				<div class="text-stat mb-3">∞</div>
+				<div class="font-medium text-lg mb-2">함께한 순간</div>
 				<p class="text-muted text-sm leading-relaxed">
-					돌잔치 · 결혼식 · 가족 모임으로<br/>채워온 순간들
+					돌잔치 · 결혼식 · 가족 모임
 				</p>
 			</div>
 		</div>
 	</Section>
+
+	<section class="max-w-3xl mx-auto px-6 py-20 md:py-24 reveal">
+		<div class="text-center mb-16">
+			<p class="text-eyebrow mb-4">MILESTONES</p>
+			<h2 class="text-headline">우리가 걸어온 길</h2>
+		</div>
+		<ol class="space-y-10 md:space-y-12 relative reveal-stagger">
+			<div class="absolute left-[3rem] md:left-20 top-2 bottom-2 w-px bg-border-warm" aria-hidden="true"></div>
+			{milestones.map(m => (
+				<li class="grid grid-cols-[3rem_1fr] md:grid-cols-[5rem_1fr] gap-6 md:gap-8 items-start relative">
+					<div class="font-serif text-2xl md:text-3xl text-accent leading-none pt-1 bg-bg pr-4 relative z-10">
+						{m.year}
+					</div>
+					<div>
+						<h3 class="font-medium text-lg mb-2">{m.title}</h3>
+						<p class="text-muted text-sm md:text-base leading-relaxed">{m.desc}</p>
+					</div>
+				</li>
+			))}
+		</ol>
+	</section>
+
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-4">MOMENTS</p>
+				<h2 class="text-headline">기록된 순간들</h2>
+			</div>
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 reveal-stagger">
+				{[1,2,3,4,5,6,7,8].map(i => (
+					<SmartImage 
+						src={`/images/about/moments-${String(i).padStart(2,'0')}.jpg`}
+						alt={`올드밀의 순간 ${i}`}
+						aspectRatio="1/1"
+						rounded="lg"
+						label={`Moment ${i}`}
+						hover
+					/>
+				))}
+			</div>
+		</div>
+	</section>
 
 	<CTASection 
 		title="직접 보러 오세요"

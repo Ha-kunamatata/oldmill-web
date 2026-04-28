@@ -1,0 +1,59 @@
+---
+interface Props {
+	src: string;
+	alt: string;
+	aspectRatio?: '4/5' | '16/9' | '1/1' | '4/3' | '21/9' | '3/2';
+	rounded?: 'lg' | 'xl' | '2xl' | 'none';
+	label?: string;
+	hover?: boolean;
+}
+
+const { 
+	src, 
+	alt,
+	aspectRatio = '4/3', 
+	rounded = 'lg',
+	label,
+	hover = false,
+} = Astro.props;
+
+const aspectClasses = {
+	'4/5': 'aspect-[4/5]',
+	'16/9': 'aspect-video',
+	'1/1': 'aspect-square',
+	'4/3': 'aspect-[4/3]',
+	'21/9': 'aspect-[21/9]',
+	'3/2': 'aspect-[3/2]',
+};
+
+const roundedClasses = {
+	'lg': 'rounded-lg',
+	'xl': 'rounded-xl',
+	'2xl': 'rounded-2xl',
+	'none': '',
+};
+
+const placeholderLabel = label || alt;
+---
+
+<div class={`${aspectClasses[aspectRatio]} ${roundedClasses[rounded]} bg-gradient-to-br from-border-warm to-bg-soft overflow-hidden relative group`}>
+	<div class="absolute inset-0 flex items-center justify-center">
+		<div class="text-center px-4">
+			<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto text-muted/40 mb-2">
+				<rect x="3" y="3" width="18" height="18" rx="2" />
+				<circle cx="8.5" cy="8.5" r="1.5" />
+				<path d="m21 15-5-5L5 21" />
+			</svg>
+			<p class="text-xs text-muted/60 tracking-wider uppercase">{placeholderLabel}</p>
+		</div>
+	</div>
+
+	<img 
+		src={src}
+		alt={alt}
+		loading="lazy"
+		class={`absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 ${hover ? 'group-hover:scale-105' : ''}`}
+		onload="this.style.opacity='1'"
+		onerror="this.remove()"
+	/>
+</div>

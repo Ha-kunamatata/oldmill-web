@@ -264,3 +264,23 @@ body {
   transform: translateY(-2px);
 }
 
+/* bg-soft 토큰 (이미 있을 수 있는데 없으면 추가) */
+@theme {
+  --color-bg-soft: #F4EFE6;
+}
+
+/* 부드러운 구분선 효과 */
+.divider-soft {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-border-warm), transparent);
+}
+
+/* 큰 숫자 디스플레이 */
+.text-stat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
