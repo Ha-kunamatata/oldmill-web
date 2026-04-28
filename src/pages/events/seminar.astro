@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQ from '../../components/FAQ.astro';
+import InfoCard from '../../components/InfoCard.astro';
+import SmartImage from '../../components/SmartImage.astro';
+
+const includes = [
+	{ icon: '◆', title: '단독 공간 사용', desc: '행사 시간 동안 단독 운영' },
+	{ icon: '◆', title: '음향 / 마이크', desc: '강연·발표용 기본 장비 제공' },
+	{ icon: '◆', title: '프로젝터 / 스크린', desc: 'PPT·자료 상영 가능' },
+	{ icon: '◆', title: '식사 / 다과', desc: '코스 식사 또는 케이터링 선택' },
+	{ icon: '◆', title: '커피 / 음료', desc: '브레이크 타임 음료 세팅' },
+	{ icon: '◆', title: '주차 안내', desc: '단체 주차 동선 지원' },
+];
+
+const useCases = [
+	{ title: '기업 워크숍', desc: '팀 빌딩 · 분기 회의 · 비전 공유' },
+	{ title: '교육 / 강연', desc: '강사 초청 강연 · 학회 · 스터디' },
+	{ title: '제품 발표회', desc: '신제품 런칭 · VIP 초청 행사' },
+	{ title: '동호회 / 모임', desc: '정기 모임 · 친목 행사' },
+];
+
+const flow = [
+	{ step: '01', title: '용도 / 인원 문의', desc: '행사 성격, 예상 인원, 필요 장비를 알려주세요.' },
+	{ step: '02', title: '현장 답사', desc: '공간 동선과 장비 구성을 직접 확인합니다.' },
+	{ step: '03', title: '구성 확정', desc: '식사 형태, 진행 순서, 추가 옵션을 협의합니다.' },
+	{ step: '04', title: '행사 당일', desc: '진행 보조와 함께 차질 없이 운영됩니다.' },
+];
+
+const faqs = [
+	{
+		q: '몇 명까지 가능한가요?',
+		a: '공간 구성에 따라 20~80명 규모 행사가 가능합니다. 강연식·라운드 테이블식·뷔페식 등 형태별로 최대 인원이 다르니 상담 시 안내드립니다.',
+	},
+	{
+		q: '음향·영상 장비가 따로 있나요?',
+		a: '기본 마이크, 프로젝터, 스크린을 제공합니다. 추가 장비(녹화, 동시통역, 라이브 송출 등)가 필요하시면 외부 업체와 연계해 드릴 수 있습니다.',
+	},
+	{
+		q: '식사 없이 회의실로만 사용할 수 있나요?',
+		a: '식사 없는 단순 공간 대관도 가능하지만, 시간대와 일정에 따라 협의가 필요합니다. 다과·음료만 포함하는 옵션도 있습니다.',
+	},
+	{
+		q: '시간 단위로 빌릴 수 있나요?',
+		a: '기본은 반나절(4시간) 또는 종일(8시간) 단위로 운영합니다. 짧은 행사는 별도 협의 가능합니다.',
+	},
+	{
+		q: '명함이나 안내 데스크 자리를 만들 수 있나요?',
+		a: '입구 쪽에 접수 데스크 또는 안내 자리를 별도로 마련해 드립니다. 사전 협의 시 동선까지 함께 잡아드립니다.',
+	},
+	{
+		q: '평일·주말 가격이 다른가요?',
+		a: '평일/주말, 시간대(오전/오후/저녁)에 따라 대관료가 달라집니다. 정확한 견적은 상담 시 안내드립니다.',
+	},
+];
+---
+
+<BaseLayout title="세미나 · THE OLD MILL" description="아산 세미나 / 비즈니스 모임, 단독 공간 대관">
+	<PageHero
+		eyebrow="SEMINAR · 세미나"
+		title="비즈니스 모임을 위한<br/>단독 공간"
+		subtitle="기업 워크숍, 강연, 발표회 — 형식에 구애받지 않고 자유롭게 활용할 수 있는 단독 운영 공간입니다."
+	/>
+
+	<section class="w-full mb-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<SmartImage 
+				src="/images/events/seminar-hero.jpg"
+				alt="세미나 진행 모습"
+				aspectRatio="21/9"
+				rounded="2xl"
+				label="세미나 진행 모습"
+			/>
+		</div>
+	</section>
+
+	<Section eyebrow="USE CASES" title="이런 모임에 적합합니다">
+		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 reveal-stagger">
+			{useCases.map(u => (
+				<div class="card-bordered p-7">
+					<h3 class="font-medium text-lg mb-3">{u.title}</h3>
+					<p class="text-muted text-sm leading-relaxed">{u.desc}</p>
+				</div>
+			))}
+		</div>
+	</Section>
+
+	<Section eyebrow="WHY OLDMILL" title="왜 올드밀인가요?">
+		<div class="grid md:grid-cols-3 gap-6 md:gap-8 mt-4 reveal-stagger">
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">01</div>
+				<h3 class="font-medium text-lg mb-3">단독 운영</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					행사 시간 동안 외부 손님 없이 단독 사용. 집중도 높은 분위기를 유지합니다.
+				</p>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">02</div>
+				<h3 class="font-medium text-lg mb-3">유연한 구성</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					강연식·원형 테이블·뷔페 등, 행사 형식에 맞춰 좌석 배치를 조정합니다.
+				</p>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">03</div>
+				<h3 class="font-medium text-lg mb-3">식사까지 한 번에</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					별도 식당 이동 없이 같은 공간에서 식사·다과까지 해결됩니다.
+				</p>
+			</div>
+		</div>
+	</Section>
+
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-4">GALLERY</p>
+				<h2 class="text-headline">진행된 세미나</h2>
+			</div>
+			<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 reveal-stagger">
+				{[1,2,3,4,5,6].map(i => (
+					<SmartImage 
+						src={`/images/events/seminar-${String(i).padStart(2,'0')}.jpg`}
+						alt={`세미나 사진 ${i}`}
+						aspectRatio="1/1"
+						rounded="lg"
+						label={`세미나 ${i}`}
+						hover
+					/>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<Section eyebrow="PACKAGE" title="패키지에 포함되는 것">
+		<div class="grid md:grid-cols-2 gap-4 md:gap-6 reveal-stagger">
+			{includes.map(item => (
+				<div class="card-bordered p-6 flex gap-5 items-start">
+					<div class="font-serif text-2xl text-accent shrink-0 leading-none mt-1">{item.icon}</div>
+					<div>
+						<div class="font-medium text-lg mb-1">{item.title}</div>
+						<p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+					</div>
+				</div>
+			))}
+		</div>
+		<p class="text-muted text-sm mt-10 pt-6 border-t border-border-warm">
+			※ 추가 장비, 케이터링, 진행 시간 등에 따라 견적이 조정됩니다.
+		</p>
+	</Section>
+
+	<section class="bg-bg-soft py-24 md:py-32 reveal">
+		<div class="max-w-4xl mx-auto px-6">
+			<div class="text-center mb-16">
+				<p class="text-eyebrow mb-4">PROCESS</p>
+				<h2 class="text-headline">진행 흐름</h2>
+			</div>
+			<ol class="space-y-12 reveal-stagger">
+				{flow.map(f => (
+					<li class="grid md:grid-cols-[6rem_1fr] gap-6 md:gap-10 items-start">
+						<div class="font-serif text-4xl md:text-5xl text-accent leading-none">{f.step}</div>
+						<div class="md:pt-1">
+							<div class="font-medium text-xl mb-3">{f.title}</div>
+							<p class="text-muted leading-relaxed">{f.desc}</p>
+						</div>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<Section eyebrow="AT A GLANCE" title="한눈에 보기">
+		<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+			<InfoCard label="권장 인원" value="20명 — 80명" hint="형식에 따라 조정" />
+			<InfoCard label="기본 단위" value="반나절 / 종일" hint="4시간 또는 8시간" />
+			<InfoCard label="예약 시점" value="1~2개월 전" hint="장비 구성에 따라" />
+		</div>
+	</Section>
+
+	<FAQ items={faqs} />
+
+	<CTASection 
+		title="행사 성격을 알려주세요<br/>맞춤으로 안내드립니다"
+		description="목적, 인원, 필요 장비만 알려주시면 적합한 구성을 제안해 드립니다."
+		buttonLabel="세미나 대관 문의"
+		phone="041-546-1080"
+	/>
+</BaseLayout>

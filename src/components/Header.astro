@@ -1,19 +1,35 @@
 ---
+// 메뉴 구조: 단일 항목은 href, 그룹 항목은 children + groupHref(모바일용)
 const navItems = [
 	{ label: '소개', href: '/about' },
 	{ label: '공간', href: '/space' },
-	{ label: '돌잔치', href: '/events/doljanchi' },
+	{
+		label: '돌잔치 / 칠·팔순',
+		groupHref: '/events/family',
+		children: [
+			{ label: '돌잔치', href: '/events/doljanchi', desc: '아이의 첫 생일' },
+			{ label: '칠·팔순', href: '/events/hwangab', desc: '어르신의 큰 날' },
+		],
+	},
 	{ label: '스몰웨딩', href: '/events/wedding' },
-	{ label: '피자체험', href: '/events/pizza-class' },
+	{ label: '세미나', href: '/events/seminar' },
+	{
+		label: '피자체험 / 졸업식',
+		groupHref: '/events/kids',
+		children: [
+			{ label: '피자체험', href: '/events/pizza-class', desc: '아이들의 화덕 피자' },
+			{ label: '졸업식', href: '/events/graduation', desc: '단체 졸업 행사' },
+		],
+	},
 	{ label: '문의', href: '/contact' },
 ];
 ---
 
 <header id="site-header" class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-transparent transition-all duration-300">
-	<div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between transition-all duration-300" id="header-inner">
-		<a href="/" class="flex items-center gap-0.5 group">
+	<div id="header-inner" class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between transition-all duration-300">
+		<a href="/" class="flex items-center gap-2 group shrink-0">
 			<img 
-			    src="/images/logo.svg" 
+				src="/images/logo.svg" 
 				alt="The Old Mill" 
 				class="h-8 md:h-10 w-auto transition-transform duration-300 group-hover:scale-105"
 			/>
@@ -21,28 +37,55 @@ const navItems = [
 		</a>
 		
 		<!-- PC 메뉴 -->
-		<nav class="hidden md:flex items-center gap-8">
+		<nav class="hidden lg:flex items-center gap-1">
 			{navItems.map(item => (
-				<a 
-					href={item.href} 
-					class="text-sm text-muted hover:text-ink transition-colors"
-				>
-					{item.label}
-				</a>
+				item.children ? (
+					<!-- 드롭다운 그룹 -->
+					<div class="relative group/dropdown">
+						<button 
+							class="px-3 py-2 text-sm text-muted hover:text-ink transition-colors flex items-center gap-1"
+							aria-haspopup="true"
+						>
+							{item.label}
+							<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform group-hover/dropdown:rotate-180">
+								<path d="M3 4.5L6 7.5L9 4.5" />
+							</svg>
+						</button>
+						<div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-200">
+							<div class="bg-bg border border-border-warm rounded-xl shadow-lg p-2 min-w-[220px]">
+								{item.children.map(child => (
+									<a 
+										href={child.href}
+										class="block px-4 py-3 rounded-lg hover:bg-bg-soft transition-colors group/item"
+									>
+										<div class="font-medium text-sm group-hover/item:text-accent transition-colors">{child.label}</div>
+										<div class="text-xs text-muted mt-0.5">{child.desc}</div>
+									</a>
+								))}
+							</div>
+						</div>
+					</div>
+				) : (
+					<a 
+						href={item.href} 
+						class="px-3 py-2 text-sm text-muted hover:text-ink transition-colors"
+					>
+						{item.label}
+					</a>
+				)
 			))}
 		</nav>
 
 		<a 
 			href="/contact" 
-			class="hidden md:inline-block bg-cta text-white px-5 py-2 rounded-full text-sm hover:bg-accent transition-colors"
+			class="hidden lg:inline-block bg-cta text-white px-5 py-2 rounded-full text-sm hover:bg-accent transition-colors shrink-0 ml-4"
 		>
 			예약 문의
 		</a>
 
-		<!-- 모바일 햄버거 버튼 -->
 		<button 
 			id="mobile-menu-toggle"
-			class="md:hidden p-2"
+			class="lg:hidden p-2"
 			aria-label="메뉴 열기"
 			aria-expanded="false"
 		>
@@ -58,18 +101,23 @@ const navItems = [
 		</button>
 	</div>
 
-	<!-- 모바일 메뉴 (슬라이드 다운) -->
+	<!-- 모바일 메뉴 -->
 	<nav 
 		id="mobile-menu"
-		class="md:hidden hidden border-t border-border-warm bg-bg"
+		class="lg:hidden hidden border-t border-border-warm bg-bg max-h-[calc(100vh-80px)] overflow-y-auto"
 	>
-		<div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
+		<div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
 			{navItems.map(item => (
 				<a 
-					href={item.href} 
-					class="py-3 text-base text-ink hover:text-accent transition-colors border-b border-border-warm last:border-b-0"
+					href={item.children ? item.groupHref : item.href} 
+					class="py-3 text-base text-ink hover:text-accent transition-colors border-b border-border-warm last:border-b-0 flex items-center justify-between"
 				>
-					{item.label}
+					<span>{item.label}</span>
+					{item.children && (
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="9 18 15 12 9 6" />
+						</svg>
+					)}
 				</a>
 			))}
 			<a 
@@ -83,7 +131,6 @@ const navItems = [
 </header>
 
 <script>
-	// 모바일 메뉴 토글
 	const toggle = document.getElementById('mobile-menu-toggle');
 	const menu = document.getElementById('mobile-menu');
 	const iconMenu = document.getElementById('icon-menu');
@@ -97,10 +144,8 @@ const navItems = [
 		toggle.setAttribute('aria-expanded', String(!isOpen));
 	});
 
-	// 헤더 스크롤 반응
 	const header = document.getElementById('site-header');
 	const inner = document.getElementById('header-inner');
-	let lastScroll = 0;
 
 	const handleScroll = () => {
 		const scrollY = window.scrollY;
@@ -111,7 +156,6 @@ const navItems = [
 			header?.classList.remove('header-scrolled');
 			inner?.classList.remove('header-inner-scrolled');
 		}
-		lastScroll = scrollY;
 	};
 
 	window.addEventListener('scroll', handleScroll, { passive: true });

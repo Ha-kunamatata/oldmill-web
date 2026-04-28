@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQ from '../../components/FAQ.astro';
+import InfoCard from '../../components/InfoCard.astro';
+import SmartImage from '../../components/SmartImage.astro';
+
+const includes = [
+	{ icon: '◆', title: '1층 전용 홀', desc: '행사 시간 동안 단독 사용' },
+	{ icon: '◆', title: '어르신 맞춤 좌석', desc: '편안한 동선과 의자 배치' },
+	{ icon: '◆', title: '한식 코스', desc: '연세에 맞춘 정갈한 한식 메뉴' },
+	{ icon: '◆', title: '축하 케이크 / 떡', desc: '의례에 맞는 답례 디저트' },
+	{ icon: '◆', title: '가족사진 자리', desc: '단체 사진을 위한 배경 세팅' },
+	{ icon: '◆', title: '주차 안내', desc: '어르신·하객 주차 동선 지원' },
+];
+
+const flow = [
+	{ step: '01', title: '예약 문의', desc: '희망 날짜와 인원, 어르신의 연세를 알려주세요.' },
+	{ step: '02', title: '현장 답사', desc: '어르신 모시기 좋은 동선과 좌석을 함께 확인합니다.' },
+	{ step: '03', title: '메뉴 / 진행 협의', desc: '연세를 고려한 메뉴, 의례 순서를 함께 정합니다.' },
+	{ step: '04', title: '행사 당일', desc: '가족이 한자리에 모이는 따뜻한 하루.' },
+];
+
+const faqs = [
+	{
+		q: '몇 분까지 가능한가요?',
+		a: '1층 전용 홀 기준 30~80명 규모 행사가 적합합니다. 정확한 수용 인원은 좌석 배치에 따라 달라지므로 상담 시 안내드립니다.',
+	},
+	{
+		q: '어르신 거동이 불편한데 괜찮을까요?',
+		a: '주차장에서 홀까지 동선이 짧고 평탄합니다. 휠체어 이동도 가능하며, 행사 진행 중 편하게 머무실 수 있도록 좌석을 배치해 드립니다.',
+	},
+	{
+		q: '한복 입은 가족 사진 촬영도 가능한가요?',
+		a: '네, 단체 사진을 위한 깔끔한 배경 자리를 준비해 드립니다. 외부 사진작가 동행도 환영합니다.',
+	},
+	{
+		q: '음식 메뉴는 어떻게 정해지나요?',
+		a: '어르신과 가족 구성원의 연령대를 고려해 한식 위주의 코스를 권해드립니다. 매운 음식·찬 음식 비중 등 세세한 부분도 조정 가능합니다.',
+	},
+	{
+		q: '예약은 얼마나 미리 해야 하나요?',
+		a: '주말 행사는 2~3개월 전 예약을 권장합니다. 평일은 좀 더 여유 있게 가능합니다.',
+	},
+	{
+		q: '답례품 / 떡은 직접 준비해도 되나요?',
+		a: '직접 준비하셔도 되고, 협력 업체를 안내해 드릴 수도 있습니다. 상담 시 알려주세요.',
+	},
+];
+---
+
+<BaseLayout title="칠·팔순 · THE OLD MILL" description="아산 칠순·팔순 잔치, 어르신을 위한 따뜻한 가족 행사">
+	<PageHero
+		eyebrow="HWANGAB · 칠·팔순"
+		title="가족이 한자리에 모이는<br/>어르신의 큰 날"
+		subtitle="평생을 가족을 위해 살아오신 어르신께. 1층 전용 홀에서 정갈한 한식과 함께 따뜻한 시간을 만들어 드립니다."
+	/>
+
+	<section class="w-full mb-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<SmartImage 
+				src="/images/events/hwangab-hero.jpg"
+				alt="칠·팔순 잔치 진행 모습"
+				aspectRatio="21/9"
+				rounded="2xl"
+				label="칠·팔순 진행 모습"
+			/>
+		</div>
+	</section>
+
+	<Section eyebrow="WHY OLDMILL" title="왜 올드밀에서<br/>칠·팔순을 할까요?">
+		<div class="grid md:grid-cols-3 gap-6 md:gap-8 mt-4 reveal-stagger">
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">01</div>
+				<h3 class="font-medium text-lg mb-3">편한 동선</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					주차장에서 홀까지 평탄한 동선. 어르신과 거동이 불편하신 가족분도 편하게 모실 수 있습니다.
+				</p>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">02</div>
+				<h3 class="font-medium text-lg mb-3">정갈한 한식</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					어르신 입맛에 맞춘 한식 위주의 코스. 매운 음식·찬 음식 비중까지 세세하게 조정해드립니다.
+				</p>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">03</div>
+				<h3 class="font-medium text-lg mb-3">단독 운영</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					다른 손님과 섞이지 않는 가족만의 시간. 사진 촬영, 의례 진행이 자연스럽습니다.
+				</p>
+			</div>
+		</div>
+	</Section>
+
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-4">GALLERY</p>
+				<h2 class="text-headline">진행된 칠·팔순</h2>
+			</div>
+			<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 reveal-stagger">
+				{[1,2,3,4,5,6].map(i => (
+					<SmartImage 
+						src={`/images/events/hwangab-${String(i).padStart(2,'0')}.jpg`}
+						alt={`칠·팔순 사진 ${i}`}
+						aspectRatio="1/1"
+						rounded="lg"
+						label={`칠·팔순 ${i}`}
+						hover
+					/>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<Section eyebrow="PACKAGE" title="패키지에 포함되는 것">
+		<div class="grid md:grid-cols-2 gap-4 md:gap-6 reveal-stagger">
+			{includes.map(item => (
+				<div class="card-bordered p-6 flex gap-5 items-start">
+					<div class="font-serif text-2xl text-accent shrink-0 leading-none mt-1">{item.icon}</div>
+					<div>
+						<div class="font-medium text-lg mb-1">{item.title}</div>
+						<p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+					</div>
+				</div>
+			))}
+		</div>
+		<p class="text-muted text-sm mt-10 pt-6 border-t border-border-warm">
+			※ 패키지 구성과 가격은 인원·날짜·옵션에 따라 조정됩니다.
+		</p>
+	</Section>
+
+	<section class="bg-bg-soft py-24 md:py-32 reveal">
+		<div class="max-w-4xl mx-auto px-6">
+			<div class="text-center mb-16">
+				<p class="text-eyebrow mb-4">PROCESS</p>
+				<h2 class="text-headline">진행 흐름</h2>
+			</div>
+			<ol class="space-y-12 reveal-stagger">
+				{flow.map(f => (
+					<li class="grid md:grid-cols-[6rem_1fr] gap-6 md:gap-10 items-start">
+						<div class="font-serif text-4xl md:text-5xl text-accent leading-none">{f.step}</div>
+						<div class="md:pt-1">
+							<div class="font-medium text-xl mb-3">{f.title}</div>
+							<p class="text-muted leading-relaxed">{f.desc}</p>
+						</div>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<Section eyebrow="AT A GLANCE" title="한눈에 보기">
+		<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+			<InfoCard label="권장 인원" value="30명 — 80명" hint="좌석 배치에 따라 조정" />
+			<InfoCard label="소요 시간" value="약 2~3시간" hint="식사 + 의례 포함" />
+			<InfoCard label="예약 시점" value="2~3개월 전 권장" hint="주말은 더 일찍 예약 필요" />
+		</div>
+	</Section>
+
+	<FAQ items={faqs} />
+
+	<CTASection 
+		title="어르신을 모시기 전에<br/>일정부터 확인해 보세요"
+		description="원하시는 날짜의 가용 여부와 추천 패키지를 빠르게 안내해드립니다."
+		buttonLabel="칠·팔순 문의"
+		phone="041-546-1080"
+	/>
+</BaseLayout>

@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQ from '../../components/FAQ.astro';
+import InfoCard from '../../components/InfoCard.astro';
+import SmartImage from '../../components/SmartImage.astro';
+
+const includes = [
+	{ icon: '◆', title: '단독 공간 사용', desc: '아이들이 마음껏 뛰놀 수 있는 환경' },
+	{ icon: '◆', title: '졸업장 수여 무대', desc: '간단한 무대 / 단상 세팅' },
+	{ icon: '◆', title: '아이 맞춤 메뉴', desc: '아이들이 잘 먹는 코스 또는 뷔페' },
+	{ icon: '◆', title: '음향 / 마이크', desc: '진행자 / 발표 음향 지원' },
+	{ icon: '◆', title: '단체 사진 자리', desc: '졸업 기념 단체 사진 배경' },
+	{ icon: '◆', title: '주차 / 동선', desc: '학부모 다수 동시 도착 대응' },
+];
+
+const targets = [
+	{ title: '어린이집 졸업', desc: '7세 졸업식, 학부모 초청 행사' },
+	{ title: '유치원 졸업', desc: '예비초등 학생들의 졸업 마무리' },
+	{ title: '학원 수료식', desc: '태권도·발레·미술학원 등 수료 행사' },
+	{ title: '소규모 학교', desc: '대안학교·소규모 그룹 졸업' },
+];
+
+const flow = [
+	{ step: '01', title: '문의 / 일정 조율', desc: '아이 인원, 학부모 인원, 진행 형식을 알려주세요.' },
+	{ step: '02', title: '진행 협의', desc: '졸업장 수여, 발표, 식사 시간 등 순서를 함께 정합니다.' },
+	{ step: '03', title: '메뉴 / 데코 확정', desc: '아이 맞춤 메뉴, 졸업식 분위기 데코를 결정합니다.' },
+	{ step: '04', title: '졸업식 당일', desc: '아이들의 마지막을 따뜻하게 마무리합니다.' },
+];
+
+const faqs = [
+	{
+		q: '몇 명까지 가능한가요?',
+		a: '아이 + 학부모 합산 50~120명 규모까지 진행 가능합니다. 좌석 배치(원탁/뷔페/스탠딩)에 따라 다르니 상담 시 안내드립니다.',
+	},
+	{
+		q: '졸업장 수여 무대가 있나요?',
+		a: '간단한 단상과 마이크를 준비해 드립니다. 졸업가운·꽃다발·트로피는 학원·기관에서 직접 준비해 주세요.',
+	},
+	{
+		q: '아이 메뉴는 따로 준비되나요?',
+		a: '네. 아이들이 잘 먹는 메뉴 위주로 구성하며, 매운 음식은 제외하거나 별도 안내드립니다. 알레르기 정보를 미리 주시면 반영합니다.',
+	},
+	{
+		q: '졸업 영상 상영도 가능한가요?',
+		a: '프로젝터·스크린이 준비되어 있어 졸업 영상 상영, 사진 슬라이드쇼 등 가능합니다.',
+	},
+	{
+		q: '단체 사진 자리는 어디인가요?',
+		a: '홀 안의 깔끔한 배경 자리를 단체 사진용으로 비워둡니다. 외부 사진작가 동행도 환영합니다.',
+	},
+	{
+		q: '예약은 얼마나 미리 해야 하나요?',
+		a: '졸업 시즌(12월~2월)은 빠르게 예약이 차므로 3~6개월 전 예약을 권장합니다.',
+	},
+];
+---
+
+<BaseLayout title="졸업식 · THE OLD MILL" description="아산 어린이집·유치원·학원 졸업식, 단체 행사 대관">
+	<PageHero
+		eyebrow="GRADUATION · 졸업식"
+		title="아이들의 마지막을<br/>따뜻하게"
+		subtitle="어린이집·유치원·학원 졸업식. 아이와 학부모 모두가 오래 기억할 마무리를 만들어 드립니다."
+	/>
+
+	<section class="w-full mb-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<SmartImage 
+				src="/images/events/graduation-hero.jpg"
+				alt="졸업식 진행 모습"
+				aspectRatio="21/9"
+				rounded="2xl"
+				label="졸업식 진행 모습"
+			/>
+		</div>
+	</section>
+
+	<Section eyebrow="FOR" title="이런 곳의 졸업식을 진행합니다">
+		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 reveal-stagger">
+			{targets.map(t => (
+				<div class="card-bordered p-7">
+					<h3 class="font-medium text-lg mb-3">{t.title}</h3>
+					<p class="text-muted text-sm leading-relaxed">{t.desc}</p>
+				</div>
+			))}
+		</div>
+	</Section>
+
+	<Section eyebrow="WHY OLDMILL" title="왜 올드밀에서<br/>졸업식을 할까요?">
+		<div class="grid md:grid-cols-3 gap-6 md:gap-8 mt-4 reveal-stagger">
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">01</div>
+				<h3 class="font-medium text-lg mb-3">아이 친화 공간</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					어린이 행사를 오래 진행해온 노하우. 아이들이 편하고 안전하게 머물 수 있는 환경입니다.
+				</p>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">02</div>
+				<h3 class="font-medium text-lg mb-3">학부모도 편하게</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					넓은 주차장과 편안한 좌석. 학부모 다수가 동시에 와도 혼잡함 없이 진행됩니다.
+				</p>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="font-serif text-4xl text-accent mb-4">03</div>
+				<h3 class="font-medium text-lg mb-3">진행 + 식사 한 번에</h3>
+				<p class="text-muted leading-relaxed text-sm">
+					졸업장 수여부터 식사·기념 사진까지 한 공간에서. 이동·대기 시간 없이 매끄럽습니다.
+				</p>
+			</div>
+		</div>
+	</Section>
+
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-4">GALLERY</p>
+				<h2 class="text-headline">진행된 졸업식</h2>
+			</div>
+			<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 reveal-stagger">
+				{[1,2,3,4,5,6].map(i => (
+					<SmartImage 
+						src={`/images/events/graduation-${String(i).padStart(2,'0')}.jpg`}
+						alt={`졸업식 사진 ${i}`}
+						aspectRatio="1/1"
+						rounded="lg"
+						label={`졸업식 ${i}`}
+						hover
+					/>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<Section eyebrow="PACKAGE" title="패키지에 포함되는 것">
+		<div class="grid md:grid-cols-2 gap-4 md:gap-6 reveal-stagger">
+			{includes.map(item => (
+				<div class="card-bordered p-6 flex gap-5 items-start">
+					<div class="font-serif text-2xl text-accent shrink-0 leading-none mt-1">{item.icon}</div>
+					<div>
+						<div class="font-medium text-lg mb-1">{item.title}</div>
+						<p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</Section>
+
+	<section class="bg-bg-soft py-24 md:py-32 reveal">
+		<div class="max-w-4xl mx-auto px-6">
+			<div class="text-center mb-16">
+				<p class="text-eyebrow mb-4">PROCESS</p>
+				<h2 class="text-headline">진행 흐름</h2>
+			</div>
+			<ol class="space-y-12 reveal-stagger">
+				{flow.map(f => (
+					<li class="grid md:grid-cols-[6rem_1fr] gap-6 md:gap-10 items-start">
+						<div class="font-serif text-4xl md:text-5xl text-accent leading-none">{f.step}</div>
+						<div class="md:pt-1">
+							<div class="font-medium text-xl mb-3">{f.title}</div>
+							<p class="text-muted leading-relaxed">{f.desc}</p>
+						</div>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<Section eyebrow="AT A GLANCE" title="한눈에 보기">
+		<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+			<InfoCard label="권장 인원" value="50명 — 120명" hint="아이 + 학부모 합산" />
+			<InfoCard label="소요 시간" value="약 2~3시간" hint="진행 + 식사 + 사진" />
+			<InfoCard label="예약 시점" value="3~6개월 전" hint="졸업 시즌은 일찍" />
+		</div>
+	</Section>
+
+	<FAQ items={faqs} />
+
+	<CTASection 
+		title="아이들의 마지막을<br/>특별하게 준비해 보세요"
+		description="기관 / 학원 단위 단체 예약 시 진행과 메뉴를 맞춤으로 구성해 드립니다."
+		buttonLabel="졸업식 단체 문의"
+		phone="041-546-1080"
+	/>
+</BaseLayout>
