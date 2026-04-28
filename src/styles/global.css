@@ -244,3 +244,23 @@ body {
   font-weight: 600;
 }
 
+.btn-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: white;
+  color: var(--color-cta);
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s ease;
+}
+
+.btn-light:hover {
+  background-color: var(--color-bg);
+  transform: translateY(-2px);
+}
+

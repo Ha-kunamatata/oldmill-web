@@ -1,105 +1,157 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/CTASection.astro';
 
 const since = 2015;
 const yearsRunning = new Date().getFullYear() - since;
+
+const events = [
+	{
+		title: '돌잔치',
+		eyebrow: 'DOLJANCHI',
+		description: '아이의 첫 생일을 가족과 함께. 1층 전용 홀에서 진행되는 프리미엄 패키지.',
+		href: '/events/doljanchi',
+		image: '/images/events/doljanchi-cover.jpg',
+	},
+	{
+		title: '스몰웨딩',
+		eyebrow: 'SMALL WEDDING',
+		description: '1층 홀 또는 3층 A·B룸에서. 가까운 사람들과 함께하는 따뜻한 결혼식.',
+		href: '/events/wedding',
+		image: '/images/events/wedding-cover.jpg',
+	},
+	{
+		title: '피자체험',
+		eyebrow: 'PIZZA CLASS',
+		description: '아이들이 직접 만드는 화덕 피자. 단체 예약 및 생일파티 가능.',
+		href: '/events/pizza-class',
+		image: '/images/events/pizza-cover.jpg',
+	},
+];
+
+const floors = [
+	{ floor: '1F', title: '이벤트 홀', desc: '돌잔치 · 스몰웨딩 · 피자체험' },
+	{ floor: '2F', title: '메인 다이닝', desc: '16 테이블 일반 식사' },
+	{ floor: '3F', title: 'A · B룸', desc: '프라이빗 스몰웨딩' },
+];
 ---
 
 <BaseLayout title="THE OLD MILL · 충남 아산 가족 레스토랑">
-	<section class="max-w-6xl mx-auto px-6 pt-20 pb-32 text-center reveal">
-		<p class="text-eyebrow mb-6">Since 2015 · Asan, Korea</p>
+	<!-- HERO -->
+	<section class="max-w-6xl mx-auto px-6 pt-20 md:pt-32 pb-16 md:pb-24 text-center reveal">
+		<p class="text-eyebrow mb-6">Since {since} · Asan, Korea</p>
 		<h1 class="text-display mb-8">
 			당신을 위한<br />행복한 시간
 		</h1>
-		<p class="prose-body max-w-xl mx-auto">
-			충남 아산에서 {yearsRunning}년째,<br />
+		<p class="prose-body max-w-xl mx-auto mb-10">
+			충남 아산에서 {yearsRunning}년째,<br class="hidden md:inline" />
 			가족의 중요한 순간을 함께해온 공간입니다.
 		</p>
-		<div class="mt-10 flex gap-3 justify-center">
-			<a href="/contact" class="btn-cta">
-				<span>예약 문의</span>
-			</a>
-			<a href="/space" class="btn-outline">
-				<span>공간 둘러보기</span>
-			</a>
+		<div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+			<a href="/contact" class="btn btn-cta"><span>예약 문의</span></a>
+			<a href="/space" class="btn btn-outline"><span>공간 둘러보기</span></a>
 		</div>
 	</section>
-	
-	<!-- 히어로 풀폭 이미지 -->
-	<section class="w-full mb-32">
+
+	<!-- HERO IMAGE -->
+	<section class="w-full mb-24 md:mb-32 reveal">
 		<div class="aspect-[16/9] md:aspect-[21/9] bg-border-warm overflow-hidden">
 			<img 
 				src="/images/hero/main.jpg" 
-				alt="올드밀 외관 또는 메인 공간"
-				class="w-full h-full object-cover"
+				alt="올드밀 외관"
+				class="img-fade w-full h-full object-cover"
+				onload="this.classList.add('is-loaded')"
 			/>
 		</div>
 	</section>
 
-	<section class="max-w-6xl mx-auto px-6 pb-32">
-		<h2 class="font-serif text-3xl md:text-4xl text-center mb-16">
-			올드밀의 특별한 시간
+	<!-- ABOUT PREVIEW -->
+	<section class="max-w-4xl mx-auto px-6 mb-32 text-center reveal">
+		<p class="text-eyebrow mb-6">ABOUT</p>
+		<h2 class="text-headline mb-8">
+			단순한 식당이 아닌,<br />추억이 머무는 공간
 		</h2>
-		<div class="grid md:grid-cols-3 gap-8 reveal-stagger">
-			<a href="/events/doljanchi" class="group card-hover">
-				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
-					<img 
-						src="/images/events/doljanchi-cover.jpg" 
-						alt="돌잔치 진행 모습"
-						loading="lazy"
-						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-	                />
-				</div>
-				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">돌잔치</h3>
-				<p class="text-muted text-sm leading-relaxed">
-					아이의 첫 생일을 가족과 함께. 1층 전용홀에서 진행되는 프리미엄 돌잔치 패키지.
-				</p>
-			</a>
-
-			<a href="/events/wedding" class="group">
-				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
-					<img 
-						src="/images/events/wedding-cover.jpg" 
-						alt="스몰웨딩 진행 모습"
-						loading="lazy"
-						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-	                />
-				</div>
-				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">스몰웨딩</h3>
-				<p class="text-muted text-sm leading-relaxed">
-					1층 홀 또는 3층 A·B룸에서. 가까운 사람들과 함께하는 따뜻한 결혼식.
-				</p>
-			</a>
-
-			<a href="/events/pizza-class" class="group">
-				<div class="aspect-[4/5] bg-border-warm rounded-lg mb-4 overflow-hidden">
-					<img 
-						src="/images/events/pizza-cover.jpg" 
-						alt="피자체험 진행 모습"
-						loading="lazy"
-						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-	                />
-				</div>
-				<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">피자체험</h3>
-				<p class="text-muted text-sm leading-relaxed">
-					아이들이 직접 만드는 화덕 피자. 단체 예약 및 생일파티 가능.
-				</p>
-			</a>
+		<p class="prose-body max-w-2xl mx-auto mb-12">
+			올드밀은 가족과 가까운 사람들이 모여 시간을 보내는 공간을 지향합니다.<br class="hidden md:inline" />
+			3층 규모의 단독 건물에서 인생의 다양한 장면들을 자연스럽게 담아냅니다.
+		</p>
+		<div class="grid grid-cols-3 gap-8 reveal-stagger">
+			<div>
+				<div class="font-serif text-4xl md:text-5xl text-accent mb-2">{yearsRunning}<span class="text-2xl">년</span></div>
+				<div class="text-sm text-muted">운영 연차</div>
+			</div>
+			<div>
+				<div class="font-serif text-4xl md:text-5xl text-accent mb-2">3<span class="text-2xl">개층</span></div>
+				<div class="text-sm text-muted">단독 건물</div>
+			</div>
+			<div>
+				<div class="font-serif text-4xl md:text-5xl text-accent mb-2">∞</div>
+				<div class="text-sm text-muted">남겨진 추억</div>
+			</div>
+		</div>
+		<div class="mt-12">
+			<a href="/about" class="link-underline text-sm text-ink">올드밀 이야기 더 보기 →</a>
 		</div>
 	</section>
 
-	<section class="bg-cta text-white reveal">
-		<div class="max-w-6xl mx-auto px-6 py-20 text-center">
-			<h2 class="font-serif text-3xl md:text-4xl mb-6">
-				가까운 곳에 있습니다
-			</h2>
-			<p class="text-white/70 mb-8 leading-relaxed">
-				충남 아산시 · 매일 11:00 - 21:30 운영<br />
-				예약 문의는 전화 또는 온라인으로
-			</p>
-			<a href="tel:041-546-1080" class="inline-block bg-white text-cta px-8 py-3 rounded-full hover:bg-bg transition-colors">
-				041-546-1080
-			</a>
+	<!-- EVENTS -->
+	<section class="max-w-6xl mx-auto px-6 mb-32 reveal">
+		<div class="text-center mb-16">
+			<p class="text-eyebrow mb-4">SPECIAL MOMENTS</p>
+			<h2 class="text-headline">올드밀의 특별한 시간</h2>
+		</div>
+		<div class="grid md:grid-cols-3 gap-6 md:gap-8 reveal-stagger">
+			{events.map(e => (
+				<a href={e.href} class="group card-hover block">
+					<div class="aspect-[4/5] bg-border-warm rounded-xl mb-5 overflow-hidden relative">
+						<img 
+							src={e.image}
+							alt={e.title}
+							loading="lazy"
+							class="img-fade w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+							onload="this.classList.add('is-loaded')"
+						/>
+						<div class="absolute inset-0 bg-cta/0 group-hover:bg-cta/15 transition-colors duration-500"></div>
+					</div>
+					<p class="text-eyebrow mb-2 text-xs">{e.eyebrow}</p>
+					<h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">{e.title}</h3>
+					<p class="text-muted text-sm leading-relaxed">{e.description}</p>
+					<span class="inline-block mt-4 text-sm link-underline">자세히 보기 →</span>
+				</a>
+			))}
 		</div>
 	</section>
+
+	<!-- SPACE PREVIEW -->
+	<section class="bg-bg-soft py-24 md:py-32 reveal">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="text-center mb-16">
+				<p class="text-eyebrow mb-4">OUR SPACE</p>
+				<h2 class="text-headline">3개 층, 3가지 시간</h2>
+			</div>
+			<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+				{floors.map(f => (
+					<a href="/space" class="card-bordered p-8 md:p-10 group">
+						<div class="font-serif text-5xl md:text-6xl text-accent mb-6 group-hover:scale-110 transition-transform duration-500 origin-left">
+							{f.floor}
+						</div>
+						<h3 class="font-serif text-2xl mb-2">{f.title}</h3>
+						<p class="text-muted text-sm">{f.desc}</p>
+					</a>
+				))}
+			</div>
+			<div class="text-center mt-12">
+				<a href="/space" class="link-underline text-sm">공간 자세히 보기 →</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<CTASection 
+		title="가까운 곳에서<br/>기다리고 있습니다"
+		description="충남 아산시에 위치한 올드밀로 직접 방문하시거나, 언제든 전화로 문의해 주세요."
+		buttonLabel="예약 문의"
+		buttonHref="/contact"
+		phone="041-546-1080"
+	/>
 </BaseLayout>

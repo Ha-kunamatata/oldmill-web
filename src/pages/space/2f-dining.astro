@@ -2,35 +2,44 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
+import CTASection from '../../components/CTASection.astro';
 ---
 
-<BaseLayout title="2층 다이닝 · THE OLD MILL" description="16테이블 규모의 일반 식사 공간">
+<BaseLayout title="2층 다이닝 · THE OLD MILL">
 	<PageHero
 		eyebrow="2ND FLOOR"
-		title="일상의 식사를 위한 공간"
+		title="일상의 식사를<br/>위한 공간"
 		subtitle="진입층(GR층)에 위치한 메인 다이닝. 16개 테이블 규모로 가족·친구와의 식사에 적합합니다."
 	/>
 
-	<Section title="공간 안내">
-		<p class="text-muted text-lg leading-loose mb-6">
-			건물의 진입층에 위치한 2층은 올드밀의 메인 다이닝 공간입니다. 
-			총 16개의 테이블이 여유롭게 배치되어 있어, 인접 테이블과의 거리를 유지한 편안한 식사가 가능합니다.
-		</p>
-		<p class="text-muted text-lg leading-loose">
-			평일 점심·저녁부터 주말 가족 외식까지, 부담 없이 방문할 수 있는 일상적인 공간을 지향합니다.
-		</p>
+	<Section eyebrow="THE SPACE" title="공간 안내">
+		<div class="space-y-6">
+			<p class="prose-body">
+				건물의 진입층에 위치한 2층은 올드밀의 메인 다이닝 공간입니다. 
+				총 16개의 테이블이 여유롭게 배치되어 있어, 인접 테이블과의 거리를 유지한 편안한 식사가 가능합니다.
+			</p>
+			<p class="prose-body">
+				평일 점심·저녁부터 주말 가족 외식까지, 부담 없이 방문할 수 있는 일상적인 공간을 지향합니다.
+			</p>
+		</div>
 	</Section>
 
-	<Section title="이용 안내">
-		<div class="grid md:grid-cols-2 gap-6">
-			<div class="border border-border-warm rounded-lg p-6">
-				<div class="text-sm text-muted mb-1">테이블 수</div>
-				<div class="font-semibold text-lg">16 테이블</div>
+	<Section eyebrow="USAGE" title="이용 안내">
+		<div class="grid md:grid-cols-2 gap-4">
+			<div class="card-bordered p-6">
+				<div class="text-sm text-muted mb-2">테이블 수</div>
+				<div class="font-medium text-xl">16 테이블</div>
 			</div>
-			<div class="border border-border-warm rounded-lg p-6">
-				<div class="text-sm text-muted mb-1">예약</div>
-				<div class="font-semibold text-lg">전화 또는 온라인 문의</div>
+			<div class="card-bordered p-6">
+				<div class="text-sm text-muted mb-2">예약</div>
+				<div class="font-medium text-xl">전화 또는 온라인</div>
 			</div>
 		</div>
 	</Section>
+
+	<CTASection 
+		title="식사 예약 문의"
+		buttonLabel="예약하기"
+		phone="041-546-1080"
+	/>
 </BaseLayout>

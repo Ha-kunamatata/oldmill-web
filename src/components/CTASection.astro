@@ -1,0 +1,38 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+	buttonLabel?: string;
+	buttonHref?: string;
+	phone?: string;
+}
+
+const { 
+	title, 
+	description,
+	buttonLabel = '문의하기',
+	buttonHref = '/contact',
+	phone,
+} = Astro.props;
+---
+
+<section class="bg-cta text-white reveal">
+	<div class="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center">
+		<h2 class="font-serif text-3xl md:text-5xl leading-tight mb-6" set:html={title}></h2>
+		{description && (
+			<p class="text-white/70 text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+				{description}
+			</p>
+		)}
+		<div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+			<a href={buttonHref} class="btn btn-light">
+				<span>{buttonLabel}</span>
+			</a>
+			{phone && (
+				<a href={`tel:${phone}`} class="text-white/80 hover:text-white transition-colors text-sm">
+					또는 {phone}
+				</a>
+			)}
+		</div>
+	</div>
+</section>

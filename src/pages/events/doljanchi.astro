@@ -2,6 +2,23 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
+import CTASection from '../../components/CTASection.astro';
+
+const includes = [
+	'1층 전용 홀 사용',
+	'기본 데코레이션 (테이블/배경)',
+	'코스 메뉴 (인원수 기준)',
+	'음료 / 디저트 세팅',
+	'사회 진행 (선택)',
+	'주차 안내',
+];
+
+const flow = [
+	{ step: '1', title: '예약 문의', desc: '희망 날짜, 예상 인원을 알려주세요.' },
+	{ step: '2', title: '현장 답사 및 상담', desc: '공간을 직접 보시고 패키지를 결정합니다.' },
+	{ step: '3', title: '계약 및 진행 준비', desc: '메뉴, 데코, 진행 순서를 확정합니다.' },
+	{ step: '4', title: '행사 당일', desc: '가족과 함께하는 특별한 하루.' },
+];
 ---
 
 <BaseLayout title="돌잔치 · THE OLD MILL" description="아산 돌잔치, 올드밀 1층 전용 홀에서">
@@ -11,66 +28,37 @@ import Section from '../../components/Section.astro';
 		subtitle="1층 전용 홀에서 진행되는 프리미엄 돌잔치. 가족만의 시간이 되도록 세심하게 준비합니다."
 	/>
 
-	<Section title="패키지에 포함되는 것">
-		<div class="grid md:grid-cols-2 gap-4">
-			{[
-				'1층 전용 홀 사용',
-				'기본 데코레이션 (테이블/배경)',
-				'코스 메뉴 (인원수 기준)',
-				'음료 / 디저트 세팅',
-				'사회 진행 (선택)',
-				'주차 안내',
-			].map(item => (
+	<Section eyebrow="PACKAGE" title="패키지에 포함되는 것">
+		<div class="grid md:grid-cols-2 gap-x-8 gap-y-4">
+			{includes.map(item => (
 				<div class="flex gap-3 items-start">
-					<span class="text-accent text-xl mt-0.5">✓</span>
+					<span class="text-accent text-xl mt-0.5 shrink-0">✓</span>
 					<span class="text-lg">{item}</span>
 				</div>
 			))}
 		</div>
-		<p class="text-muted text-sm mt-8">
+		<p class="text-muted text-sm mt-10 pt-6 border-t border-border-warm">
 			※ 패키지 구성은 인원·예산에 따라 조정 가능합니다. 자세한 내용은 상담 시 안내드립니다.
 		</p>
 	</Section>
 
-	<Section title="진행 흐름">
-		<ol class="space-y-6">
-			<li class="flex gap-4">
-				<div class="font-serif text-2xl text-accent w-8 shrink-0">1</div>
-				<div>
-					<div class="font-semibold text-lg mb-1">예약 문의</div>
-					<p class="text-muted">희망 날짜, 예상 인원을 알려주세요.</p>
-				</div>
-			</li>
-			<li class="flex gap-4">
-				<div class="font-serif text-2xl text-accent w-8 shrink-0">2</div>
-				<div>
-					<div class="font-semibold text-lg mb-1">현장 답사 및 상담</div>
-					<p class="text-muted">공간을 직접 보시고 패키지를 결정합니다.</p>
-				</div>
-			</li>
-			<li class="flex gap-4">
-				<div class="font-serif text-2xl text-accent w-8 shrink-0">3</div>
-				<div>
-					<div class="font-semibold text-lg mb-1">계약 및 진행 준비</div>
-					<p class="text-muted">메뉴, 데코, 진행 순서를 확정합니다.</p>
-				</div>
-			</li>
-			<li class="flex gap-4">
-				<div class="font-serif text-2xl text-accent w-8 shrink-0">4</div>
-				<div>
-					<div class="font-semibold text-lg mb-1">행사 당일</div>
-					<p class="text-muted">가족과 함께하는 특별한 하루.</p>
-				</div>
-			</li>
+	<Section eyebrow="PROCESS" title="진행 흐름">
+		<ol class="space-y-8 reveal-stagger">
+			{flow.map(f => (
+				<li class="flex gap-6">
+					<div class="font-serif text-3xl text-accent w-12 shrink-0 leading-none">{f.step}</div>
+					<div>
+						<div class="font-medium text-lg mb-1">{f.title}</div>
+						<p class="text-muted">{f.desc}</p>
+					</div>
+				</li>
+			))}
 		</ol>
 	</Section>
 
-	<section class="bg-cta text-white">
-		<div class="max-w-4xl mx-auto px-6 py-16 text-center">
-			<h2 class="font-serif text-3xl mb-6">먼저 일정부터 확인해 보세요</h2>
-			<a href="/contact" class="inline-block bg-white text-cta px-8 py-3 rounded-full hover:bg-bg transition-colors">
-				돌잔치 문의하기
-			</a>
-		</div>
-	</section>
+	<CTASection 
+		title="먼저 일정부터 확인해 보세요"
+		description="원하시는 날짜의 가용 여부를 빠르게 확인해드립니다."
+		buttonLabel="돌잔치 문의하기"
+	/>
 </BaseLayout>

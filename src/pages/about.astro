@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import CTASection from '../components/CTASection.astro';
+
+const since = 2015;
+const yearsRunning = new Date().getFullYear() - since;
+---
+
+<BaseLayout title="소개 · THE OLD MILL" description="충남 아산에서 10년, 올드밀이 걸어온 길">
+	<PageHero
+		eyebrow="ABOUT"
+		title="가족의 순간을<br/>담는 공간"
+		subtitle={`${since}년 충남 아산에 문을 열고, ${yearsRunning}년이 넘는 시간 동안 가족의 가장 중요한 순간들을 함께해왔습니다.`}
+	/>
+
+	<Section eyebrow="OUR STORY" title="올드밀의 시작">
+		<div class="space-y-6">
+			<p class="prose-body">
+				올드밀은 단순한 레스토랑이 아닌, 가족과 가까운 사람들이 모여 함께 시간을 보내는 공간을 지향합니다.
+				'방앗간(Old Mill)'이라는 모티프에서 시작된 이 공간은, 옛날 사람들이 모여 이야기를 나누고 일상을 마무리하던
+				따뜻함을 현대적으로 재해석한 곳입니다.
+			</p>
+			<p class="prose-body">
+				3층 규모의 단독 건물에서 돌잔치, 스몰웨딩, 가족 식사, 어린이 피자체험까지 — 인생의 다양한 장면들을
+				자연스럽게 담아냅니다.
+			</p>
+		</div>
+	</Section>
+
+	<Section eyebrow="VALUES" title="우리가 지키는 것" align="center">
+		<div class="grid md:grid-cols-3 gap-8 mt-4 reveal-stagger">
+			<div class="card-bordered p-8 text-center">
+				<div class="font-serif text-5xl text-accent mb-3">{yearsRunning}+</div>
+				<div class="font-medium mb-2">운영 연차</div>
+				<p class="text-muted text-sm leading-relaxed">
+					{since}년 시작, 한 곳에서<br/>꾸준히 운영해온 시간
+				</p>
+			</div>
+			<div class="card-bordered p-8 text-center">
+				<div class="font-serif text-5xl text-accent mb-3">3F</div>
+				<div class="font-medium mb-2">단독 건물</div>
+				<p class="text-muted text-sm leading-relaxed">
+					용도별로 분리된 3개 층,<br/>각자의 시간을 위한 공간
+				</p>
+			</div>
+			<div class="card-bordered p-8 text-center">
+				<div class="font-serif text-5xl text-accent mb-3">∞</div>
+				<div class="font-medium mb-2">남겨진 추억</div>
+				<p class="text-muted text-sm leading-relaxed">
+					돌잔치 · 결혼식 · 가족 모임으로<br/>채워온 순간들
+				</p>
+			</div>
+		</div>
+	</Section>
+
+	<CTASection 
+		title="직접 보러 오세요"
+		description="사진보다 공간이, 글보다 분위기가 더 많이 말합니다. 편하게 방문하셔서 둘러보고 상담 받으실 수 있습니다."
+		buttonLabel="방문 예약 문의"
+		phone="041-546-1080"
+	/>
+</BaseLayout>
