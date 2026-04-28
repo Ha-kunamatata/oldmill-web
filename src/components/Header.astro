@@ -1,5 +1,4 @@
 ---
-// 메뉴 구조: 단일 항목은 href, 그룹 항목은 children + groupHref(모바일용)
 const navItems = [
 	{ label: '소개', href: '/about' },
 	{ label: '공간', href: '/space' },
@@ -40,18 +39,17 @@ const navItems = [
 		<nav class="hidden lg:flex items-center gap-1">
 			{navItems.map(item => (
 				item.children ? (
-					<!-- 드롭다운 그룹 -->
-					<div class="relative group/dropdown">
-						<button 
-							class="px-3 py-2 text-sm text-muted hover:text-ink transition-colors flex items-center gap-1"
-							aria-haspopup="true"
+					<div class="dropdown-wrap">
+						<a 
+							href={item.groupHref}
+							class="dropdown-trigger px-3 py-2 text-sm text-muted hover:text-ink transition-colors flex items-center gap-1"
 						>
 							{item.label}
-							<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform group-hover/dropdown:rotate-180">
+							<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-chevron transition-transform">
 								<path d="M3 4.5L6 7.5L9 4.5" />
 							</svg>
-						</button>
-						<div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-200">
+						</a>
+						<div class="dropdown-panel">
 							<div class="bg-bg border border-border-warm rounded-xl shadow-lg p-2 min-w-[220px]">
 								{item.children.map(child => (
 									<a 
@@ -129,6 +127,39 @@ const navItems = [
 		</div>
 	</nav>
 </header>
+
+<style>
+	/* 드롭다운 — Tailwind 그룹 의존 없이 순수 CSS로 처리 */
+	.dropdown-wrap {
+		position: relative;
+	}
+
+	.dropdown-panel {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-4px);
+		padding-top: 8px;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+		z-index: 100;
+	}
+
+	.dropdown-wrap:hover .dropdown-panel,
+	.dropdown-wrap:focus-within .dropdown-panel {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: translateX(-50%) translateY(0);
+	}
+
+	.dropdown-wrap:hover .dropdown-chevron,
+	.dropdown-wrap:focus-within .dropdown-chevron {
+		transform: rotate(180deg);
+	}
+</style>
 
 <script>
 	const toggle = document.getElementById('mobile-menu-toggle');
