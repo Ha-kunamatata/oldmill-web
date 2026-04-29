@@ -92,10 +92,11 @@ const services = [
 
 // 진행 흐름
 const flow = [
-	{ step: '01', title: '전화 또는 온라인 문의', desc: '희망 날짜·인원·점심/저녁 알려주시면 가용 여부를 빠르게 확인해 드립니다.' },
-	{ step: '02', title: '공간 안내 + 예약 확정', desc: '가능 공간을 안내드리고, 예약금 입금 후 확정됩니다. (예약금 10만원 / 1개월 전까지 환불 가능)' },
-	{ step: '03', title: '메뉴 / 돌상 / 부대 서비스 협의', desc: '한식·양식 메뉴는 일주일 전까지 결정. 돌상·스냅·HMU·사회자 등 추가 옵션 안내드립니다.' },
-	{ step: '04', title: '돌잔치 당일', desc: '아이의 첫 생일, 가족만의 특별한 시간을 만들어 드립니다.' },
+	{ step: '01', title: '전화 또는 온라인 문의', desc: '희망 날짜·인원·점심/저녁 알려주시면 가용 여부를 빠르게 확인해 드립니다.', sub: 'D-60 ~ D-90' },
+	{ step: '02', title: '공간 안내 + 예약 확정', desc: '가능 공간을 안내드리고, 예약금 입금 후 확정됩니다. (예약금 10만원 / 1개월 전까지 환불 가능)', sub: 'D-30 이전 권장' },
+	{ step: '03', title: '메뉴 / 돌상 / 부대 서비스 협의', desc: '한식·양식 메뉴는 행사 일주일 전(D-7)까지 결정. 돌상·스냅·HMU·사회자 등 추가 옵션 안내드립니다.', sub: 'D-30 ~ D-7' },
+	{ step: '04', title: '최종 점검 안내', desc: '행사 10일 전, 올드밀에서 최종 확인 사항을 직접 톡으로 안내드립니다. 메뉴 발주 마감, 진행 협의가 마무리되는 시점입니다.', sub: 'D-10' },
+	{ step: '05', title: '돌잔치 당일', desc: '아이의 첫 생일, 가족만의 특별한 시간을 만들어 드립니다.', sub: 'D-Day' },
 ];
 
 // FAQ — 실 상담 정보 반영
@@ -143,6 +144,14 @@ const faqs = [
 	{
 		q: '예약은 얼마나 미리 해야 하나요?',
 		a: '주말 예약은 보통 2~3개월 전에 차는 편입니다. 평일은 좀 더 여유가 있어 1~2개월 전에도 가능합니다. 원하시는 날짜가 있으면 먼저 가용 여부부터 확인해 드립니다.',
+	},
+	{
+		q: '메뉴는 언제까지 정해야 하나요?',
+		a: '식재료 발주를 위해 행사 7일 전(D-7)까지는 메뉴와 예상 인원을 확정해 주셔야 합니다.\n\n행사 10일 전(D-10)에 올드밀에서 최종 점검 톡을 보내드리니, 그 시점부터 7일 전 사이에 결정해 주시면 됩니다.',
+	},
+	{
+		q: '주류 반입이 가능한가요?',
+		a: '네, 직접 가져오실 수 있습니다.\n\n올드밀은 주류 판매가 되지 않는 레스토랑이라, 약주를 드실 분이 계시면 가족분이 직접 준비해서 가져오시면 됩니다. 별도의 콜키지 비용은 없습니다.',
 	},
 ];
 ---
@@ -550,7 +559,12 @@ const faqs = [
 			<ol class="space-y-12 reveal-stagger">
 				{flow.map(f => (
 					<li class="grid md:grid-cols-[6rem_1fr] gap-6 md:gap-10 items-start">
-						<div class="font-serif text-4xl md:text-5xl text-accent leading-none">{f.step}</div>
+						<div>
+						    <div class="font-serif text-4xl md:text-5xl text-accent leading-none">{f.step}</div>
+							{f.sub && (
+							    <div class="text-xs text-muted mt-2 tracking-wider">{f.sub}</div>
+							)}
+						</div>
 						<div class="md:pt-1">
 							<div class="font-medium text-xl mb-3">{f.title}</div>
 							<p class="text-muted leading-relaxed">{f.desc}</p>
@@ -592,6 +606,103 @@ const faqs = [
 		buttonLabel="돌잔치 문의하기"
 		phone="041-546-1080"
 	/>
+
+
+	<!-- D-7 체크리스트 -->
+	<Section eyebrow="FINAL CHECK" title="행사 7일 전,<br/>꼭 확인이 필요한 것들">
+		<p class="prose-body text-center max-w-2xl mx-auto mb-12 -mt-4">
+			행사 10일 전, 올드밀에서 최종 점검 톡을 보내드립니다.<br/>
+			그 안에 6가지를 미리 정리해 두시면 행사가 매끄럽게 진행됩니다.
+		</p>
+		<div class="grid md:grid-cols-2 gap-4 md:gap-6 reveal-stagger">
+			<div class="card-bordered p-7 bg-bg">
+				<div class="flex items-baseline gap-3 mb-3">
+					<div class="font-serif text-2xl text-accent leading-none shrink-0">01</div>
+					<h3 class="font-medium text-lg">메뉴와 예상 인원</h3>
+				</div>
+				<p class="text-muted text-sm leading-relaxed mb-3">
+					식재료 발주를 위해 <strong class="text-ink font-medium">행사 7일 전(D-7)</strong>까지는 확정해 주세요. 그 이후에는 변경이 어렵습니다.
+				</p>
+			</div>
+
+			<div class="card-bordered p-7 bg-bg">
+				<div class="flex items-baseline gap-3 mb-3">
+					<div class="font-serif text-2xl text-accent leading-none shrink-0">02</div>
+					<h3 class="font-medium text-lg">주류 (필요 시 직접 반입)</h3>
+				</div>
+				<p class="text-muted text-sm leading-relaxed">
+					올드밀은 주류 판매가 되지 않는 레스토랑입니다. 약주를 드실 분이 계시다면 <strong class="text-ink font-medium">조금 준비해서 가져오시면 됩니다.</strong>
+				</p>
+			</div>
+
+			<div class="card-bordered p-7 bg-bg">
+				<div class="flex items-baseline gap-3 mb-3">
+					<div class="font-serif text-2xl text-accent leading-none shrink-0">03</div>
+					<h3 class="font-medium text-lg">돌상 업체 정보</h3>
+				</div>
+				<p class="text-muted text-sm leading-relaxed">
+					외부 돌상 업체를 이용하시는 경우, 어느 업체인지 <strong class="text-ink font-medium">미리 알려주세요.</strong> 도착 시간과 세팅 동선을 함께 잡습니다.
+				</p>
+			</div>
+
+			<div class="card-bordered p-7 bg-bg">
+				<div class="flex items-baseline gap-3 mb-3">
+					<div class="font-serif text-2xl text-accent leading-none shrink-0">04</div>
+					<h3 class="font-medium text-lg">성장 동영상 전달</h3>
+				</div>
+				<p class="text-muted text-sm leading-relaxed mb-3">
+					미리 보내주시면 행사 전 세팅을 마쳐둡니다.
+				</p>
+				<div class="space-y-1.5 text-xs">
+					<div class="flex items-center gap-2 text-muted">
+						<span class="text-accent">·</span>
+						<span>카카오톡으로 전달</span>
+					</div>
+					<div class="flex items-center gap-2 text-muted">
+						<span class="text-accent">·</span>
+						<a href="mailto:sang9649@nate.com" class="hover:text-ink transition-colors">sang9649@nate.com</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-bordered p-7 bg-bg">
+				<div class="flex items-baseline gap-3 mb-3">
+					<div class="font-serif text-2xl text-accent leading-none shrink-0">05</div>
+					<h3 class="font-medium text-lg">초대 시간 / 식사 시간 확인</h3>
+				</div>
+				<p class="text-muted text-sm leading-relaxed">
+					손님 초대 시간과 식사 시작 시간을 다시 한 번 확인합니다. <strong class="text-ink font-medium">초대 후 30분 뒤 식사 시작</strong>이 기본입니다.
+				</p>
+			</div>
+
+			<div class="card-bordered p-7 bg-bg">
+				<div class="flex items-baseline gap-3 mb-3">
+					<div class="font-serif text-2xl text-accent leading-none shrink-0">06</div>
+					<h3 class="font-medium text-lg">사회자 확정</h3>
+				</div>
+				<p class="text-muted text-sm leading-relaxed">
+					가족 분이 진행하시는지, 외부 사회자를 섭외하시는지 알려주세요. 마이크·진행 동선을 미리 준비합니다.
+				</p>
+			</div>
+		</div>
+
+		<!-- 운영 안내 박스 -->
+		<div class="mt-10 p-6 bg-bg-soft rounded-2xl border-l-4 border-accent">
+			<div class="flex items-start gap-4">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-accent shrink-0 mt-0.5">
+					<circle cx="12" cy="12" r="10" />
+					<polyline points="12 6 12 12 16 14" />
+				</svg>
+				<div>
+					<h4 class="font-medium mb-2">행사 10일 전, 직접 톡으로 안내드립니다</h4>
+					<p class="text-sm text-muted leading-relaxed">
+						올드밀에서 D-10 시점에 위 6가지 항목을 정리한 최종 점검 메시지를 보내드립니다.<br class="hidden md:inline"/>
+						그때 준비된 부분만 답변 주시면 됩니다 — 미리 다 챙기실 필요는 없습니다.
+					</p>
+				</div>
+			</div>
+		</div>
+	</Section>
 
 	<script>
 	    const tabs = document.querySelectorAll('.schedule-tab');
