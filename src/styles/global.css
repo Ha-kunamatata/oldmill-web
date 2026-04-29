@@ -284,3 +284,192 @@ body {
   color: var(--color-accent);
 }
 
+/* ──────────────────────────────────────
+   돌잔치 타임테이블 — Style A
+   ────────────────────────────────────── */
+.schedule-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-warm);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .schedule-card {
+    padding: 2rem;
+  }
+}
+
+.schedule-tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: var(--color-bg-soft);
+  border-radius: 0.625rem;
+  margin-bottom: 1.75rem;
+}
+
+.schedule-tab {
+  flex: 1;
+  padding: 0.625rem 0.875rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  font-family: inherit;
+}
+
+.schedule-tab .tab-label {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+
+.schedule-tab .tab-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--color-muted);
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
+}
+
+.schedule-tab.is-active {
+  background: var(--color-bg);
+  box-shadow: 0 1px 3px -1px rgba(31, 27, 22, 0.08);
+}
+
+.schedule-tab.is-active .tab-label {
+  color: var(--color-ink);
+}
+
+.schedule-tab.is-active .tab-sub {
+  color: var(--color-accent);
+  opacity: 1;
+}
+
+.schedule-tab:hover:not(.is-active) .tab-label {
+  color: var(--color-ink);
+}
+
+/* 패널 전환 */
+.schedule-panel {
+  animation: schedule-fade 0.4s ease;
+}
+
+.schedule-panel.is-hidden {
+  display: none;
+}
+
+@keyframes schedule-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 타임라인 */
+.schedule-track {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.schedule-line {
+  position: absolute;
+  left: 0.25rem;
+  top: 0.875rem;
+  bottom: 0.875rem;
+  width: 1px;
+  background: var(--color-border-warm);
+}
+
+.schedule-step {
+  position: relative;
+  padding: 0.875rem 0;
+}
+
+.schedule-step:first-child {
+  padding-top: 0;
+}
+
+.schedule-step:last-child {
+  padding-bottom: 0;
+}
+
+.schedule-dot {
+  position: absolute;
+  left: -1.75rem;
+  top: 1.125rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-bg);
+}
+
+.schedule-step:first-child .schedule-dot {
+  top: 0.25rem;
+}
+
+.schedule-dot.is-muted {
+  background: var(--color-border-warm);
+}
+
+.schedule-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .schedule-time {
+    font-size: 1.5rem;
+  }
+}
+
+.schedule-time.is-muted {
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.schedule-options {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  color: var(--color-accent);
+  margin-left: 0.375rem;
+  letter-spacing: 0;
+}
+
+.schedule-detail {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+  line-height: 1.6;
+}
+
+.schedule-note {
+  margin-top: 1.25rem;
+  padding: 0.875rem 1.125rem;
+  background: var(--color-bg);
+  border-left: 2px solid var(--color-accent);
+  border-radius: 0 0.375rem 0.375rem 0;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.schedule-note strong {
+  color: var(--color-ink);
+  font-weight: 500;
+}
+

@@ -4,61 +4,158 @@ import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
 import CTASection from '../../components/CTASection.astro';
 import FAQ from '../../components/FAQ.astro';
-import InfoCard from '../../components/InfoCard.astro';
 import SmartImage from '../../components/SmartImage.astro';
 
-const includes = [
-	{ icon: '◆', title: '1층 전용 홀', desc: '행사 시간 동안 단독 사용' },
-	{ icon: '◆', title: '기본 데코레이션', desc: '테마에 맞는 테이블/배경 세팅' },
-	{ icon: '◆', title: '코스 메뉴', desc: '인원수에 맞춘 가족 코스' },
-	{ icon: '◆', title: '음료 / 디저트', desc: '돌상 케이크 별도 안내' },
-	{ icon: '◆', title: '진행 보조', desc: '사회 진행 옵션 (선택)' },
-	{ icon: '◆', title: '주차 안내', desc: '하객 주차 안내 지원' },
+// 3개 공간 정보 (좌석수 포함)
+const venues = [
+	{
+		name: '1층 컨퍼런스룸',
+		floor: '1F',
+		guarantee: 30,
+		capacity: '30~60명',
+		seats: { dining: 54, buffet: 42 },
+		feature: '가장 넓은 공간, 대규모 행사에 적합',
+		image: '/images/events/doljanchi-venue-1f.jpg',
+		recommended: true,
+	},
+	{
+		name: '3층 파티룸 A',
+		floor: '3F · A',
+		guarantee: 15,
+		capacity: '15~36명',
+		seats: null,
+		feature: '소규모 가족 행사에 아늑한 공간',
+		image: '/images/events/doljanchi-venue-3a.jpg',
+	},
+	{
+		name: '3층 파티룸 B',
+		floor: '3F · B',
+		guarantee: 20,
+		capacity: '20~48명',
+		seats: { dining: 48, buffet: 36 },
+		feature: '중규모 행사, 프라이빗한 분위기',
+		image: '/images/events/doljanchi-venue-3b.jpg',
+	},
 ];
 
+// 식사 옵션
+const mealStyles = [
+	{
+		title: '한상차림',
+		desc: '테이블에 일괄 세팅. 더 많은 좌석 수용 가능',
+		features: ['1F: 54석', '3B: 48석'],
+		icon: '◐',
+	},
+	{
+		title: '샐러드바 세팅',
+		desc: '뷔페식 동선 확보. 자유로운 식사 분위기',
+		features: ['1F: 42석', '3B: 36석'],
+		icon: '◑',
+	},
+];
+
+// 돌상 옵션
+const tableStyles = [
+	{
+		title: '현대식 돌상',
+		desc: '깔끔하고 모던한 디자인. 사진이 잘 나옵니다',
+		image: '/images/events/doljanchi-table-modern.jpg',
+	},
+	{
+		title: '전통식 돌상',
+		desc: '한국 전통 색감과 격식. 어르신들이 선호',
+		image: '/images/events/doljanchi-table-traditional.jpg',
+	},
+];
+
+// 부대 서비스
+const services = [
+	{
+		category: '스냅 촬영',
+		desc: '돌잔치 전문 사진 작가 연결',
+		options: ['화원스냅', '동화스냅', '브라우니스냅'],
+		note: '직접 섭외도 가능합니다',
+	},
+	{
+		category: '헤어 / 메이크업',
+		desc: '아기·엄마 HMU 잘하시는 곳 안내',
+		options: ['천안 지역', '아산 지역'],
+		note: '예약은 직접 진행',
+	},
+	{
+		category: '전문 사회자',
+		desc: '돌잔치·스몰웨딩 경험 많은 사회자',
+		options: ['일반 진행 — 15만원', '이벤트 진행 — 20만원'],
+		note: '올드밀 소개 시 할인가',
+	},
+];
+
+// 진행 흐름
 const flow = [
-	{ step: '01', title: '예약 문의', desc: '희망 날짜와 예상 인원을 알려주세요. 가능 일정을 확인해 드립니다.' },
-	{ step: '02', title: '현장 답사 및 상담', desc: '직접 방문하셔서 공간을 보시고, 패키지·메뉴·진행 방식을 정합니다.' },
-	{ step: '03', title: '계약 및 진행 준비', desc: '메뉴, 데코, 진행 순서를 확정하고 행사 D-Day까지 함께 준비합니다.' },
-	{ step: '04', title: '행사 당일', desc: '아이의 첫 생일, 가족과 함께하는 특별한 하루를 만들어 드립니다.' },
+	{ step: '01', title: '전화 또는 온라인 문의', desc: '희망 날짜·인원·점심/저녁 알려주시면 가용 여부를 빠르게 확인해 드립니다.' },
+	{ step: '02', title: '공간 안내 + 예약 확정', desc: '가능 공간을 안내드리고, 예약금 입금 후 확정됩니다. (예약금 10만원 / 1개월 전까지 환불 가능)' },
+	{ step: '03', title: '메뉴 / 돌상 / 부대 서비스 협의', desc: '한식·양식 메뉴는 일주일 전까지 결정. 돌상·스냅·HMU·사회자 등 추가 옵션 안내드립니다.' },
+	{ step: '04', title: '돌잔치 당일', desc: '아이의 첫 생일, 가족만의 특별한 시간을 만들어 드립니다.' },
 ];
 
+// FAQ — 실 상담 정보 반영
 const faqs = [
 	{
-		q: '몇 명까지 가능한가요?',
-		a: '1층 전용 홀 기준 최대 ○○명까지 진행 가능합니다. 정확한 수용 인원은 행사 형태(테이블 배치, 무대 유무 등)에 따라 달라지므로, 상담 시 안내해드립니다.',
+		q: '예약은 어떻게 진행되나요?',
+		a: '예약금 10만원 입금으로 확정됩니다.\n\n· 농협은행: 000-0000-0000-00 (예금주: ROM 레스토랑올드밀)\n· 입금 시 아기 이름과 함께 알려주세요\n· 1개월 전까지 환불 가능',
 	},
 	{
-		q: '돌상은 어떻게 준비되나요?',
-		a: '돌상 대여 업체와 협력하여 진행해 드리거나, 가족분이 직접 준비하신 돌상을 세팅해 드립니다. 상담 시 선호하시는 방식을 알려주세요.',
+		q: '공간이 세 개나 있는데, 어떻게 정하나요?',
+		a: '예상 인원이 가장 큰 기준입니다.\n\n· 15~30명대 → 3층 파티룸 A 또는 B\n· 30~60명 → 1층 컨퍼런스룸\n\n좌석 운영 방식(한상차림 vs 샐러드바)에 따라서도 수용 인원이 달라지니 상담 시 함께 안내드립니다.',
 	},
 	{
-		q: '돌잡이 진행이 가능한가요?',
-		a: '네, 가능합니다. 돌잡이용 물품은 직접 준비하셔도 되고, 저희 쪽에서 안내드릴 수 있는 옵션도 있습니다.',
+		q: '한상차림과 샐러드바 세팅의 차이가 뭔가요?',
+		a: '같은 공간이어도 좌석 운영 방식에 따라 수용 인원이 달라집니다.\n\n· 한상차림: 테이블에 일괄 세팅, 더 많은 좌석 가능\n  - 1층: 54석 / 3B룸: 48석\n\n· 샐러드바 세팅: 뷔페식 동선 확보, 자유로운 분위기\n  - 1층: 42석 / 3B룸: 36석\n\n인원과 분위기에 맞춰 선택하시면 됩니다.',
 	},
 	{
-		q: '평일과 주말 가격이 다른가요?',
-		a: '평일/주말, 시간대에 따라 패키지 가격이 달라질 수 있습니다. 정확한 견적은 날짜와 인원 알려주시면 안내해 드립니다.',
+		q: '"보증 인원"이 무슨 뜻인가요?',
+		a: '예약 시 최소로 보장해주셔야 하는 인원수입니다.\n\n예: 1층 컨퍼런스룸 보증인원 30명. 실제 참석이 25명이라도 30명 기준 식대로 정산됩니다.\n\n공간을 단독으로 사용하기 때문에 운영을 위한 최소 기준을 두고 있습니다.',
 	},
 	{
-		q: '취소 / 변경은 어떻게 하나요?',
-		a: '예약금 입금 후의 취소·변경 정책은 계약서에 명시되어 있습니다. 일정 변경은 가능한 빨리 연락주시면 최대한 협조해 드립니다.',
+		q: '왜 점심·저녁 두 타임만 운영하시나요?',
+		a: '독립된 공간에서 충분한 시간을 가지실 수 있도록, 한 타임당 한 팀만 받습니다.\n\n다른 손님과 시간이 겹치지 않으니, 행사 진행 · 사진 촬영 · 가족 환담을 여유롭게 하실 수 있습니다.',
+	},
+	{
+		q: '메뉴는 어떻게 정하나요?',
+		a: '한식과 양식을 섞어서 주문하실 수 있습니다.\n\n행사 일주일 전까지만 알려주시면 됩니다. 인원에 따라 메뉴 주문 방식이 달라질 수 있어, 상담 시 함께 안내드립니다.',
+	},
+	{
+		q: '돌상은 직접 준비해야 하나요?',
+		a: '두 가지 옵션이 있습니다.\n\n· 올드밀 돌상 (각 20만원)\n  - 현대식 / 전통식 두 가지 유형\n· 외부 반입\n  - 직접 준비하시거나 외부 업체 이용 가능',
+	},
+	{
+		q: '돌잡이 진행도 도와주시나요?',
+		a: '돌잡이 시간이 타임테이블에 포함되어 있습니다. 식사 시작 30분 전이 손님 초대 시간이며, 이때 돌잡이를 진행하시는 경우가 많습니다. 돌잡이 물품은 직접 준비 또는 외부 업체 이용이 가능합니다.',
+	},
+	{
+		q: '스냅 / 헤어메이크업 / 사회자 연결도 가능한가요?',
+		a: '네, 잘하시는 분들을 안내해드릴 수 있습니다.\n\n· 스냅: 화원스냅 / 동화스냅 / 브라우니스냅\n· 헤어메이크업: 천안·아산 지역\n· 사회자: 15만원 (올드밀 소개가)\n\n필요하신 서비스 알려주시면 연락처 또는 예약을 도와드립니다.',
 	},
 	{
 		q: '하객 주차는 가능한가요?',
-		a: '건물 자체 주차 공간이 있으며, 행사 인원에 따라 추가 안내를 도와드립니다.',
+		a: '건물 자체 주차장이 있어 하객 분들이 편하게 주차하실 수 있습니다. 행사 인원이 많을 경우 주차 안내 동선을 별도로 잡아드립니다.',
+	},
+	{
+		q: '예약은 얼마나 미리 해야 하나요?',
+		a: '주말 예약은 보통 2~3개월 전에 차는 편입니다. 평일은 좀 더 여유가 있어 1~2개월 전에도 가능합니다. 원하시는 날짜가 있으면 먼저 가용 여부부터 확인해 드립니다.',
 	},
 ];
 ---
 
-<BaseLayout title="돌잔치 · THE OLD MILL" description="아산 돌잔치, 올드밀 1층 전용 홀에서 진행하는 프리미엄 돌잔치 패키지">
+<BaseLayout title="돌잔치 · THE OLD MILL" description="아산 돌잔치, 올드밀 1층 컨퍼런스룸 / 3층 파티룸. 독립 공간 단독 사용, 점심·저녁 단 두 타임만 운영.">
 	<PageHero
 		eyebrow="DOLJANCHI · 돌잔치"
-		title="아이의 첫 생일,<br/>가족의 잊지 못할 하루"
-		subtitle="1층 전용 홀에서 진행되는 프리미엄 돌잔치. 가족만의 시간이 되도록 세심하게 준비합니다."
+		title="아이의 첫 생일,<br/>가족만의 시간"
+		subtitle="독립된 공간에서 충분한 시간을 보내실 수 있도록, 한 타임당 한 팀만 모십니다."
 	/>
 
-	<section class="w-full mb-24 reveal">
+	<!-- Hero -->
+	<section class="w-full mb-20 reveal">
 		<div class="max-w-6xl mx-auto px-6">
 			<SmartImage 
 				src="/images/events/doljanchi-hero.jpg"
@@ -70,32 +167,330 @@ const faqs = [
 		</div>
 	</section>
 
+	<!-- At a Glance -->
+	<section class="max-w-5xl mx-auto px-6 mb-24 reveal">
+		<div class="text-center mb-10">
+			<p class="text-eyebrow mb-3">AT A GLANCE</p>
+			<h2 class="text-headline">한눈에 보기</h2>
+		</div>
+		<div class="grid md:grid-cols-3 gap-4 md:gap-6 reveal-stagger">
+			<div class="card-bordered p-7 text-center bg-bg">
+				<div class="text-xs text-muted uppercase tracking-wider mb-3">VENUES</div>
+				<div class="font-serif text-4xl md:text-5xl text-accent mb-3">3</div>
+				<div class="font-medium text-lg mb-1">3개 공간 선택</div>
+				<p class="text-muted text-sm">1층 컨퍼런스룸<br/>3층 파티룸 A · B</p>
+			</div>
+			<div class="card-bordered p-7 text-center bg-bg">
+				<div class="text-xs text-muted uppercase tracking-wider mb-3">CAPACITY</div>
+				<div class="font-serif text-4xl md:text-5xl text-accent mb-3">15<span class="text-2xl">~</span>60</div>
+				<div class="font-medium text-lg mb-1">명 수용</div>
+				<p class="text-muted text-sm">공간별 보증 인원<br/>15 / 20 / 30명</p>
+			</div>
+			<div class="card-bordered p-7 text-center bg-bg">
+				<div class="text-xs text-muted uppercase tracking-wider mb-3">DURATION</div>
+				<div class="font-serif text-4xl md:text-5xl text-accent mb-3">5<span class="text-2xl">h</span></div>
+				<div class="font-medium text-lg mb-1">한 타임당</div>
+				<p class="text-muted text-sm">스냅 입장부터<br/>퇴실까지</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 3개 공간 비교 -->
+	<Section eyebrow="VENUES" title="3개 공간 중 선택">
+		<p class="prose-body text-center max-w-2xl mx-auto mb-12 -mt-4">
+			인원과 분위기에 맞춰 세 공간 중 한 곳을 단독으로 사용하실 수 있습니다.<br/>
+			모든 공간은 외부 손님 없이 가족만의 시간으로 운영됩니다.
+		</p>
+		<div class="grid md:grid-cols-3 gap-4 md:gap-6 reveal-stagger">
+			{venues.map(v => (
+				<div class={`card-bordered overflow-hidden flex flex-col ${v.recommended ? 'ring-2 ring-accent' : ''}`}>
+					{v.recommended && (
+						<div class="bg-accent text-white text-xs uppercase tracking-wider text-center py-2">
+							가장 많이 찾는 공간
+						</div>
+					)}
+					<div class="aspect-[4/3] bg-border-warm">
+						<SmartImage 
+							src={v.image}
+							alt={v.name}
+							aspectRatio="4/3"
+							rounded="none"
+							label={v.name}
+						/>
+					</div>
+					<div class="p-6 flex-1 flex flex-col">
+						<div class="text-eyebrow text-xs mb-2">{v.floor}</div>
+						<h3 class="font-serif text-2xl mb-4">{v.name}</h3>
+						<div class="space-y-3 mb-4">
+							<div class="flex justify-between items-baseline border-b border-border-warm pb-2">
+								<span class="text-xs text-muted uppercase tracking-wider">보증 인원</span>
+								<span class="font-medium">{v.guarantee}명</span>
+							</div>
+							<div class="flex justify-between items-baseline border-b border-border-warm pb-2">
+								<span class="text-xs text-muted uppercase tracking-wider">수용 인원</span>
+								<span class="font-medium">{v.capacity}</span>
+							</div>
+							{v.seats && (
+								<div class="pt-1 space-y-1.5">
+									<div class="flex justify-between items-baseline text-xs">
+										<span class="text-muted">한상차림</span>
+										<span>{v.seats.dining}석</span>
+									</div>
+									<div class="flex justify-between items-baseline text-xs">
+										<span class="text-muted">샐러드바</span>
+										<span>{v.seats.buffet}석</span>
+									</div>
+								</div>
+							)}
+						</div>
+						<p class="text-muted text-sm leading-relaxed mt-auto">{v.feature}</p>
+					</div>
+				</div>
+			))}
+		</div>
+		<div class="mt-8 p-5 bg-bg-soft rounded-xl text-sm text-muted">
+			<strong class="text-ink font-medium">보증 인원이란?</strong> 예약 시 최소로 보장해주셔야 하는 인원수입니다. 실제 참석이 더 적어도 보증 인원 기준으로 정산됩니다. 공간을 단독으로 사용하기 때문에 운영 최소 기준을 두고 있습니다.
+		</div>
+	</Section>
+
+	<!-- 타임테이블 -->
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-3xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-3">SCHEDULE</p>
+				<h2 class="text-headline">행사 진행 시간</h2>
+				<p class="prose-body max-w-xl mx-auto mt-6">
+					독립된 공간에서 충분한 시간을 가지실 수 있도록,<br class="hidden md:inline" />
+					한 타임당 <strong class="text-ink font-medium">한 팀만</strong> 모십니다.
+				</p>
+			</div>
+
+			<!-- 점심/저녁 탭 + 타임라인 -->
+			<div class="schedule-card">
+				<div class="schedule-tabs" role="tablist">
+					<button class="schedule-tab is-active" data-tab="lunch" role="tab" aria-selected="true">
+						<span class="tab-label">점심</span>
+						<span class="tab-sub">LUNCH</span>
+					</button>
+					<button class="schedule-tab" data-tab="dinner" role="tab" aria-selected="false">
+						<span class="tab-label">저녁</span>
+						<span class="tab-sub">DINNER</span>
+					</button>
+				</div>
+
+				<!-- 점심 패널 -->
+				<div class="schedule-panel" data-panel="lunch">
+					<div class="schedule-track">
+						<div class="schedule-line"></div>
+
+						<div class="schedule-step">
+							<div class="schedule-dot"></div>
+							<div class="schedule-time">9:30</div>
+							<div class="schedule-detail">스냅 촬영 시작 · 룸 입장 가능</div>
+						</div>
+
+						<div class="schedule-step">
+							<div class="schedule-dot"></div>
+							<div class="schedule-time">
+								11:00
+								<span class="schedule-options">또는 11:30 · 12:30</span>
+							</div>
+							<div class="schedule-detail">손님 초대 시간 · 돌잡이 시작</div>
+						</div>
+
+						<div class="schedule-step">
+							<div class="schedule-dot"></div>
+							<div class="schedule-time">+30분</div>
+							<div class="schedule-detail">식사 시작 (초대 시간 30분 후)</div>
+						</div>
+
+						<div class="schedule-step">
+							<div class="schedule-dot is-muted"></div>
+							<div class="schedule-time is-muted">14:30</div>
+							<div class="schedule-detail">퇴실</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 저녁 패널 -->
+				<div class="schedule-panel is-hidden" data-panel="dinner">
+					<div class="schedule-track">
+						<div class="schedule-line"></div>
+
+						<div class="schedule-step">
+							<div class="schedule-dot"></div>
+							<div class="schedule-time">15:30</div>
+							<div class="schedule-detail">스냅 촬영 시작 · 룸 입장 가능</div>
+						</div>
+
+						<div class="schedule-step">
+							<div class="schedule-dot"></div>
+							<div class="schedule-time">
+								16:30
+								<span class="schedule-options">또는 17:00 · 17:30 · 18:00</span>
+							</div>
+							<div class="schedule-detail">손님 초대 시간 · 돌잡이 시작</div>
+						</div>
+
+						<div class="schedule-step">
+							<div class="schedule-dot"></div>
+							<div class="schedule-time">+30분</div>
+							<div class="schedule-detail">식사 시작 (초대 시간 30분 후)</div>
+						</div>
+
+						<div class="schedule-step">
+							<div class="schedule-dot is-muted"></div>
+							<div class="schedule-time is-muted">20:00</div>
+							<div class="schedule-detail">퇴실</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="schedule-note">
+				각 행사별로 <strong>30분의 시차</strong>를 두어<br class="md:hidden"/> 식사 제공이 원활하게 이루어집니다.
+			</div>
+		</div>
+	</section>
+
+			<!-- 점심 / 저녁 요약 -->
+			<div class="grid md:grid-cols-2 gap-6 reveal-stagger">
+				<div class="card-bordered p-7 bg-bg">
+					<div class="text-eyebrow text-xs mb-4">LUNCH · 점심</div>
+					<div class="space-y-3 text-sm">
+						<div class="flex justify-between border-b border-border-warm pb-2">
+							<span class="text-muted">스냅 촬영 / 입장</span>
+							<span class="font-medium">9:30</span>
+						</div>
+						<div class="flex justify-between border-b border-border-warm pb-2">
+							<span class="text-muted">손님 초대 (돌잡이)</span>
+							<span class="font-medium">11:00 / 11:30 / 12:30</span>
+						</div>
+						<div class="flex justify-between border-b border-border-warm pb-2">
+							<span class="text-muted">식사 시작</span>
+							<span class="font-medium">초대 30분 후</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="text-muted">퇴실</span>
+							<span class="font-medium">14:30</span>
+						</div>
+					</div>
+				</div>
+				<div class="card-bordered p-7 bg-bg">
+					<div class="text-eyebrow text-xs mb-4">DINNER · 저녁</div>
+					<div class="space-y-3 text-sm">
+						<div class="flex justify-between border-b border-border-warm pb-2">
+							<span class="text-muted">스냅 촬영 / 입장</span>
+							<span class="font-medium">15:30</span>
+						</div>
+						<div class="flex justify-between border-b border-border-warm pb-2">
+							<span class="text-muted">손님 초대 (돌잡이)</span>
+							<span class="font-medium">16:30 / 17:00 / 17:30 / 18:00</span>
+						</div>
+						<div class="flex justify-between border-b border-border-warm pb-2">
+							<span class="text-muted">식사 시작</span>
+							<span class="font-medium">초대 30분 후</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="text-muted">퇴실</span>
+							<span class="font-medium">20:00</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 식사 옵션 -->
+	<Section eyebrow="DINING STYLE" title="식사 운영 방식">
+		<p class="prose-body text-center max-w-2xl mx-auto mb-12 -mt-4">
+			같은 공간이어도 좌석 운영 방식에 따라 수용 인원과 분위기가 달라집니다.<br/>
+			인원에 맞춰 둘 중 하나를 선택해 주세요.
+		</p>
+		<div class="grid md:grid-cols-2 gap-6 reveal-stagger">
+			{mealStyles.map(m => (
+				<div class="card-bordered p-8 bg-bg">
+					<div class="font-serif text-4xl text-accent mb-4">{m.icon}</div>
+					<h3 class="font-serif text-2xl mb-3">{m.title}</h3>
+					<p class="text-muted leading-relaxed mb-5">{m.desc}</p>
+					<div class="flex gap-3 flex-wrap">
+						{m.features.map(f => (
+							<span class="inline-block px-3 py-1.5 bg-bg-soft rounded-full text-xs">{f}</span>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+		<p class="text-muted text-sm mt-8 text-center">
+			※ 메뉴는 한식·양식 혼합 가능. 행사 일주일 전까지 알려주시면 됩니다.
+		</p>
+	</Section>
+
+	<!-- 돌상 옵션 -->
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-5xl mx-auto px-6">
+			<div class="text-center mb-12">
+				<p class="text-eyebrow mb-3">DOL TABLE</p>
+				<h2 class="text-headline">돌상 옵션</h2>
+				<p class="prose-body max-w-xl mx-auto mt-6">
+					올드밀에서 두 가지 유형의 돌상을 준비해드리거나,<br class="hidden md:inline" />
+					외부에서 직접 준비하셔도 됩니다.
+				</p>
+			</div>
+			<div class="grid md:grid-cols-2 gap-6 reveal-stagger">
+				{tableStyles.map(t => (
+					<div class="card-bordered overflow-hidden bg-bg">
+						<SmartImage 
+							src={t.image}
+							alt={t.title}
+							aspectRatio="4/3"
+							rounded="none"
+							label={t.title}
+						/>
+						<div class="p-6">
+							<div class="flex items-baseline justify-between mb-2">
+								<h3 class="font-serif text-xl">{t.title}</h3>
+								<span class="text-accent font-medium">20만원</span>
+							</div>
+							<p class="text-muted text-sm leading-relaxed">{t.desc}</p>
+						</div>
+					</div>
+				))}
+			</div>
+			<div class="mt-6 p-5 bg-bg rounded-xl text-sm text-muted text-center border border-border-warm">
+				<strong class="text-ink font-medium">외부 반입도 가능합니다.</strong> 직접 준비하시는 분들도 많습니다.
+			</div>
+		</div>
+	</section>
+
+	<!-- WHY OLDMILL -->
 	<Section eyebrow="WHY OLDMILL" title="왜 올드밀에서<br/>돌잔치를 할까요?">
 		<div class="grid md:grid-cols-3 gap-6 md:gap-8 mt-4 reveal-stagger">
 			<div class="card-bordered p-8 bg-bg">
 				<div class="font-serif text-4xl text-accent mb-4">01</div>
 				<h3 class="font-medium text-lg mb-3">단독 운영</h3>
 				<p class="text-muted leading-relaxed text-sm">
-					행사 시간 동안 1층 홀을 통째로 사용합니다. 다른 손님과 섞이지 않는, 가족만의 시간.
+					한 타임 한 팀만. 외부 손님과 섞이지 않는, 가족만의 독립된 공간을 보장합니다.
 				</p>
 			</div>
 			<div class="card-bordered p-8 bg-bg">
 				<div class="font-serif text-4xl text-accent mb-4">02</div>
-				<h3 class="font-medium text-lg mb-3">10년의 경험</h3>
+				<h3 class="font-medium text-lg mb-3">충분한 시간</h3>
 				<p class="text-muted leading-relaxed text-sm">
-					{new Date().getFullYear() - 2015}년 동안 수많은 돌잔치를 진행해온 노하우. 진행 흐름이 자연스럽습니다.
+					스냅 입장부터 퇴실까지 5시간. 행사 진행과 사진 촬영을 서두르지 않고 진행하실 수 있습니다.
 				</p>
 			</div>
 			<div class="card-bordered p-8 bg-bg">
 				<div class="font-serif text-4xl text-accent mb-4">03</div>
-				<h3 class="font-medium text-lg mb-3">맞춤 진행</h3>
+				<h3 class="font-medium text-lg mb-3">10년의 경험</h3>
 				<p class="text-muted leading-relaxed text-sm">
-					정해진 매뉴얼이 아닌, 가족별로 다른 진행 방식. 원하시는 흐름에 맞춰드립니다.
+					{new Date().getFullYear() - 2015}년간 수많은 돌잔치를 진행해온 노하우. 자연스러운 흐름으로 함께합니다.
 				</p>
 			</div>
 		</div>
 	</Section>
 
+	<!-- 갤러리 -->
 	<section class="bg-bg-soft py-20 md:py-24 reveal">
 		<div class="max-w-6xl mx-auto px-6">
 			<div class="text-center mb-12">
@@ -117,23 +512,35 @@ const faqs = [
 		</div>
 	</section>
 
-	<Section eyebrow="PACKAGE" title="패키지에 포함되는 것">
-		<div class="grid md:grid-cols-2 gap-4 md:gap-6 reveal-stagger">
-			{includes.map(item => (
-				<div class="card-bordered p-6 flex gap-5 items-start">
-					<div class="font-serif text-2xl text-accent shrink-0 leading-none mt-1">{item.icon}</div>
-					<div>
-						<div class="font-medium text-lg mb-1">{item.title}</div>
-						<p class="text-muted text-sm leading-relaxed">{item.desc}</p>
-					</div>
+	<!-- 부대 서비스 -->
+	<Section eyebrow="ADDITIONAL SERVICES" title="필요하신 서비스 연결">
+		<p class="prose-body text-center max-w-2xl mx-auto mb-12 -mt-4">
+			돌잔치를 더 풍성하게 만들 수 있는 전문 서비스들을<br/>
+			올드밀이 직접 검증한 분들로 안내해 드립니다.
+		</p>
+		<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+			{services.map(s => (
+				<div class="card-bordered p-7 bg-bg">
+					<h3 class="font-serif text-xl mb-2">{s.category}</h3>
+					<p class="text-muted text-sm mb-5 leading-relaxed">{s.desc}</p>
+					<ul class="space-y-2 mb-5">
+						{s.options.map(o => (
+							<li class="flex gap-2 text-sm items-start">
+								<span class="text-accent mt-1">·</span>
+								<span>{o}</span>
+							</li>
+						))}
+					</ul>
+					<p class="text-xs text-muted pt-4 border-t border-border-warm">{s.note}</p>
 				</div>
 			))}
 		</div>
-		<p class="text-muted text-sm mt-10 pt-6 border-t border-border-warm">
-			※ 패키지 구성과 가격은 인원·날짜·옵션에 따라 조정됩니다. 자세한 견적은 상담 시 안내드립니다.
+		<p class="text-muted text-sm mt-8 text-center">
+			※ 자세한 연락처와 안내는 상담 시 알려드립니다.
 		</p>
 	</Section>
 
+	<!-- 진행 흐름 -->
 	<section class="bg-bg-soft py-24 md:py-32 reveal">
 		<div class="max-w-4xl mx-auto px-6">
 			<div class="text-center mb-16">
@@ -154,20 +561,56 @@ const faqs = [
 		</div>
 	</section>
 
-	<Section eyebrow="AT A GLANCE" title="한눈에 보기">
-		<div class="grid md:grid-cols-3 gap-6 reveal-stagger">
-			<InfoCard label="권장 인원" value="○○명 — ○○명" hint="패키지에 따라 조정 가능" />
-			<InfoCard label="소요 시간" value="약 2시간" hint="진행 방식에 따라 ±30분" />
-			<InfoCard label="예약 시점" value="2~3개월 전 권장" hint="주말은 더 일찍 예약 필요" />
+	<!-- 예약 안내 -->
+	<Section eyebrow="RESERVATION" title="예약 안내">
+		<div class="grid md:grid-cols-2 gap-6 reveal-stagger">
+			<div class="card-bordered p-8 bg-bg">
+				<div class="text-eyebrow text-xs mb-3">DEPOSIT</div>
+				<div class="font-serif text-3xl mb-4">예약금 <span class="text-accent">10만원</span></div>
+				<ul class="space-y-2 text-sm text-muted">
+					<li>· 예약금 입금 시 예약 확정</li>
+					<li>· 1개월 전까지 환불 가능</li>
+					<li>· 입금 시 아기 이름 함께 알려주세요</li>
+				</ul>
+			</div>
+			<div class="card-bordered p-8 bg-bg">
+				<div class="text-eyebrow text-xs mb-3">BANK ACCOUNT</div>
+				<div class="font-serif text-2xl mb-2">농협은행</div>
+				<div class="text-lg font-mono mb-3 text-accent">000-0000-0000-00</div>
+				<p class="text-sm text-muted">예금주: ROM (레스토랑올드밀)</p>
+			</div>
 		</div>
 	</Section>
 
+	<!-- FAQ -->
 	<FAQ items={faqs} />
 
+	<!-- CTA -->
 	<CTASection 
 		title="먼저 일정부터<br/>확인해 보세요"
-		description="원하시는 날짜의 가용 여부를 빠르게 확인해드립니다. 부담 없이 문의해 주세요."
+		description="원하시는 날짜와 인원, 점심/저녁만 알려주시면 가능 여부를 빠르게 안내해 드립니다."
 		buttonLabel="돌잔치 문의하기"
 		phone="041-546-1080"
 	/>
+
+	<script>
+	    const tabs = document.querySelectorAll('.schedule-tab');
+	    const panels = document.querySelectorAll('.schedule-panel');
+
+	    tabs.forEach(tab => {
+		    tab.addEventListener('click', () => {
+			    const target = tab.getAttribute('data-tab');
+
+			    tabs.forEach(t => {
+			    	t.classList.toggle('is-active', t === tab);
+		    		t.setAttribute('aria-selected', String(t === tab));
+			    });
+
+			    panels.forEach(panel => {
+		    		const isMatch = panel.getAttribute('data-panel') === target;
+		    		panel.classList.toggle('is-hidden', !isMatch);
+		    	});
+	    	});
+	    });
+    </script>
 </BaseLayout>
