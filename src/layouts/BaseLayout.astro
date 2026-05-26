@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
@@ -22,6 +23,47 @@ const {
 
 const canonical = new URL(Astro.url.pathname, SITE_URL).toString();
 const ogImageUrl = new URL(ogImage, SITE_URL).toString();
+
+// Breadcrumb JSON-LD — pathname 자동 분석
+const breadcrumbLabels: Record<string, string> = {
+	'': 'Home',
+	about: '소개',
+	menu: '메뉴',
+	space: '공간',
+	'1f-hall': '1층 이벤트 홀',
+	'2f-dining': '2층 메인 다이닝',
+	'3f-rooms': '3층 A·B룸',
+	events: '행사',
+	family: '가족 행사',
+	kids: '아이들을 위한 시간',
+	doljanchi: '돌잔치',
+	hwangab: '칠·팔순',
+	wedding: '스몰웨딩',
+	seminar: '세미나',
+	graduation: '졸업식',
+	'pizza-class': '피자체험',
+	contact: '문의',
+};
+
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbItems = [
+	{ name: '홈', url: SITE_URL + '/' },
+	...segments.map((seg, i) => ({
+		name: breadcrumbLabels[seg] ?? seg,
+		url: SITE_URL + '/' + segments.slice(0, i + 1).join('/'),
+	})),
+];
+
+const breadcrumbSchema = breadcrumbItems.length > 1 ? {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: breadcrumbItems.map((item, i) => ({
+		'@type': 'ListItem',
+		position: i + 1,
+		name: item.name,
+		item: item.url,
+	})),
+} : null;
 
 // Restaurant JSON-LD (구글·네이버 비즈니스 카드용)
 const restaurantSchema = {
@@ -97,10 +139,17 @@ const restaurantSchema = {
 
 		<!-- Restaurant 스키마 -->
 		<script is:inline type="application/ld+json" set:html={JSON.stringify(restaurantSchema)} />
+		{breadcrumbSchema && (
+			<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+		)}
+
+		<!-- 페이지 전환 (Astro View Transitions) -->
+		<ClientRouter />
 	</head>
 	<body class="bg-bg text-ink">
+		<a href="#main-content" class="skip-to-content">본문으로 건너뛰기</a>
 		<Header />
-		<main>
+		<main id="main-content" tabindex="-1">
 			<slot />
 		</main>
 		<Footer />

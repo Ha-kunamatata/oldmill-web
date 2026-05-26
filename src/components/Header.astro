@@ -82,11 +82,12 @@ const navItems = [
 			예약 문의
 		</a>
 
-		<button 
+		<button
 			id="mobile-menu-toggle"
 			class="lg:hidden p-2"
 			aria-label="메뉴 열기"
 			aria-expanded="false"
+			aria-controls="mobile-menu"
 		>
 			<svg id="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<line x1="3" y1="6" x2="21" y2="6" />
@@ -190,45 +191,65 @@ const navItems = [
 </style>
 
 <script>
-	const toggle = document.getElementById('mobile-menu-toggle');
-	const menu = document.getElementById('mobile-menu');
-	const iconMenu = document.getElementById('icon-menu');
-	const iconClose = document.getElementById('icon-close');
+	// View Transitions 환경에서도 매 페이지마다 재바인딩되도록 함수로 감싼다.
+	function initHeader() {
+		const toggle = document.getElementById('mobile-menu-toggle');
+		const menu = document.getElementById('mobile-menu');
+		const iconMenu = document.getElementById('icon-menu');
+		const iconClose = document.getElementById('icon-close');
 
-	toggle?.addEventListener('click', () => {
-		const isOpen = !menu?.classList.contains('hidden');
-		menu?.classList.toggle('hidden');
-		iconMenu?.classList.toggle('hidden');
-		iconClose?.classList.toggle('hidden');
-		toggle.setAttribute('aria-expanded', String(!isOpen));
-	});
+		const closeMobileMenu = () => {
+			menu?.classList.add('hidden');
+			iconMenu?.classList.remove('hidden');
+			iconClose?.classList.add('hidden');
+			toggle?.setAttribute('aria-expanded', 'false');
+		};
 
-	// 모바일 아코디언
-	document.querySelectorAll<HTMLButtonElement>('.mobile-accordion-toggle').forEach(btn => {
-		btn.addEventListener('click', () => {
-			const panel = btn.nextElementSibling as HTMLElement | null;
-			const chevron = btn.querySelector('.mobile-accordion-chevron') as HTMLElement | null;
-			const isOpen = !panel?.classList.contains('hidden');
-			panel?.classList.toggle('hidden');
-			chevron?.style.setProperty('transform', isOpen ? 'rotate(0deg)' : 'rotate(180deg)');
-			btn.setAttribute('aria-expanded', String(!isOpen));
+		toggle?.addEventListener('click', () => {
+			const isOpen = !menu?.classList.contains('hidden');
+			menu?.classList.toggle('hidden');
+			iconMenu?.classList.toggle('hidden');
+			iconClose?.classList.toggle('hidden');
+			toggle.setAttribute('aria-expanded', String(!isOpen));
 		});
-	});
 
-	const header = document.getElementById('site-header');
-	const inner = document.getElementById('header-inner');
+		// ESC 키로 모바일 메뉴 닫기 (접근성)
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && menu && !menu.classList.contains('hidden')) {
+				closeMobileMenu();
+			}
+		});
 
-	const handleScroll = () => {
-		const scrollY = window.scrollY;
-		if (scrollY > 20) {
-			header?.classList.add('header-scrolled');
-			inner?.classList.add('header-inner-scrolled');
-		} else {
-			header?.classList.remove('header-scrolled');
-			inner?.classList.remove('header-inner-scrolled');
-		}
-	};
+		// 모바일 아코디언
+		document.querySelectorAll<HTMLButtonElement>('.mobile-accordion-toggle').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const panel = btn.nextElementSibling as HTMLElement | null;
+				const chevron = btn.querySelector('.mobile-accordion-chevron') as HTMLElement | null;
+				const isOpen = !panel?.classList.contains('hidden');
+				panel?.classList.toggle('hidden');
+				chevron?.style.setProperty('transform', isOpen ? 'rotate(0deg)' : 'rotate(180deg)');
+				btn.setAttribute('aria-expanded', String(!isOpen));
+			});
+		});
 
-	window.addEventListener('scroll', handleScroll, { passive: true });
-	handleScroll();
+		const header = document.getElementById('site-header');
+		const inner = document.getElementById('header-inner');
+
+		const handleScroll = () => {
+			const scrollY = window.scrollY;
+			if (scrollY > 20) {
+				header?.classList.add('header-scrolled');
+				inner?.classList.add('header-inner-scrolled');
+			} else {
+				header?.classList.remove('header-scrolled');
+				inner?.classList.remove('header-inner-scrolled');
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		handleScroll();
+	}
+
+	initHeader();
+	document.addEventListener('astro:page-load', initHeader);
 </script>

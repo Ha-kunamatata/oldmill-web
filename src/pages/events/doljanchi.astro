@@ -657,23 +657,28 @@ const faqs = [
 	</Section>
 
 	<script>
-	    const tabs = document.querySelectorAll('.schedule-tab');
-	    const panels = document.querySelectorAll('.schedule-panel');
+		function initScheduleTabs() {
+			const tabs = document.querySelectorAll('.schedule-tab');
+			const panels = document.querySelectorAll('.schedule-panel');
 
-	    tabs.forEach(tab => {
-		    tab.addEventListener('click', () => {
-			    const target = tab.getAttribute('data-tab');
+			tabs.forEach(tab => {
+				tab.addEventListener('click', () => {
+					const target = tab.getAttribute('data-tab');
 
-			    tabs.forEach(t => {
-			    	t.classList.toggle('is-active', t === tab);
-		    		t.setAttribute('aria-selected', String(t === tab));
-			    });
+					tabs.forEach(t => {
+						t.classList.toggle('is-active', t === tab);
+						t.setAttribute('aria-selected', String(t === tab));
+					});
 
-			    panels.forEach(panel => {
-		    		const isMatch = panel.getAttribute('data-panel') === target;
-		    		panel.classList.toggle('is-hidden', !isMatch);
-		    	});
-	    	});
-	    });
-    </script>
+					panels.forEach(panel => {
+						const isMatch = panel.getAttribute('data-panel') === target;
+						panel.classList.toggle('is-hidden', !isMatch);
+					});
+				});
+			});
+		}
+
+		initScheduleTabs();
+		document.addEventListener('astro:page-load', initScheduleTabs);
+	</script>
 </BaseLayout>
