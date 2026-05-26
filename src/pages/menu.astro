@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import CTASection from '../components/CTASection.astro';
+
+const categories = [
+	{
+		title: '화덕 피자',
+		eyebrow: 'PIZZA',
+		desc: '직접 반죽한 도우, 화덕에서 구워내는 시그니처 피자',
+	},
+	{
+		title: '파스타 · 메인',
+		eyebrow: 'PASTA & MAIN',
+		desc: '제철 식재료로 만드는 파스타와 스테이크',
+	},
+	{
+		title: '한식 · 코스',
+		eyebrow: 'KOREAN',
+		desc: '돌잔치·칠팔순 행사를 위한 정갈한 한식 코스',
+	},
+	{
+		title: '디저트 · 음료',
+		eyebrow: 'DESSERT & DRINKS',
+		desc: '직접 만드는 디저트와 음료',
+	},
+];
+---
+
+<BaseLayout
+	title="메뉴 · THE OLD MILL"
+	description="올드밀 메뉴 안내 — 화덕 피자, 파스타, 한식 코스, 디저트"
+>
+	<PageHero
+		eyebrow="MENU"
+		title="올드밀의 메뉴"
+		subtitle="가족과 함께 편하게 드실 수 있는 음식들로 구성했습니다."
+	/>
+
+	<Section eyebrow="CATEGORIES" title="카테고리">
+		<p class="prose-body text-center max-w-2xl mx-auto mb-12 -mt-4">
+			일반 식사 메뉴와 행사용 코스 메뉴를 함께 운영합니다.<br/>
+			상세 메뉴는 곧 업데이트됩니다.
+		</p>
+		<div class="grid md:grid-cols-2 gap-6 reveal-stagger">
+			{categories.map(c => (
+				<div class="card-bordered p-8 bg-bg">
+					<p class="text-eyebrow mb-3">{c.eyebrow}</p>
+					<h3 class="font-serif text-2xl mb-3">{c.title}</h3>
+					<p class="text-muted text-sm leading-relaxed">{c.desc}</p>
+				</div>
+			))}
+		</div>
+	</Section>
+
+	<section class="bg-bg-soft py-20 md:py-24 reveal">
+		<div class="max-w-3xl mx-auto px-6 text-center">
+			<p class="text-eyebrow mb-4">COMING SOON</p>
+			<h2 class="text-headline mb-6">상세 메뉴 · 가격표</h2>
+			<p class="prose-body mb-10">
+				전체 메뉴와 가격은 PDF 메뉴판으로 곧 안내드립니다.<br/>
+				그동안은 전화로 문의해 주시면 자세히 안내해 드립니다.
+			</p>
+			<a href="tel:041-546-1080" class="btn btn-cta">
+				<span>전화 문의 · 041-546-1080</span>
+			</a>
+		</div>
+	</section>
+
+	<Section eyebrow="EVENT MENUS" title="행사용 코스가 따로 있습니다">
+		<p class="prose-body text-center max-w-2xl mx-auto mb-10 -mt-4">
+			돌잔치·스몰웨딩·칠팔순 등 행사를 위한 한식·양식 코스는 별도로 운영됩니다. 인원과 행사 종류에 맞춰 맞춤으로 구성됩니다.
+		</p>
+		<div class="grid md:grid-cols-3 gap-4 reveal-stagger text-center">
+			<a href="/events/doljanchi" class="card-bordered p-6 hover:border-accent transition-colors">
+				<div class="font-serif text-2xl mb-1">돌잔치</div>
+				<p class="text-xs text-muted">한식·양식 혼합 가능</p>
+			</a>
+			<a href="/events/wedding" class="card-bordered p-6 hover:border-accent transition-colors">
+				<div class="font-serif text-2xl mb-1">스몰웨딩</div>
+				<p class="text-xs text-muted">하객 인원 맞춤 코스</p>
+			</a>
+			<a href="/events/hwangab" class="card-bordered p-6 hover:border-accent transition-colors">
+				<div class="font-serif text-2xl mb-1">칠·팔순</div>
+				<p class="text-xs text-muted">어르신 맞춤 한식</p>
+			</a>
+		</div>
+	</Section>
+
+	<CTASection
+		title="더 자세한 안내가<br/>필요하신가요?"
+		description="알레르기·예산·인원 등 상황에 맞춰 직접 안내드립니다."
+		buttonLabel="문의하기"
+		phone="041-546-1080"
+	/>
+</BaseLayout>

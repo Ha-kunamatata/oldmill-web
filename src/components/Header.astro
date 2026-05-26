@@ -1,6 +1,7 @@
 ---
 const navItems = [
 	{ label: '소개', href: '/about' },
+	{ label: '메뉴', href: '/menu' },
 	{ label: '공간', href: '/space' },
 	{
 		label: '돌잔치 / 칠·팔순',
@@ -100,26 +101,53 @@ const navItems = [
 	</div>
 
 	<!-- 모바일 메뉴 -->
-	<nav 
+	<nav
 		id="mobile-menu"
 		class="lg:hidden hidden border-t border-border-warm bg-bg max-h-[calc(100vh-80px)] overflow-y-auto"
 	>
 		<div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
 			{navItems.map(item => (
-				<a 
-					href={item.children ? item.groupHref : item.href} 
-					class="py-3 text-base text-ink hover:text-accent transition-colors border-b border-border-warm last:border-b-0 flex items-center justify-between"
-				>
-					<span>{item.label}</span>
-					{item.children && (
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<polyline points="9 18 15 12 9 6" />
-						</svg>
-					)}
-				</a>
+				item.children ? (
+					<div class="mobile-accordion border-b border-border-warm last:border-b-0">
+						<button
+							type="button"
+							class="mobile-accordion-toggle w-full py-3 text-base text-ink hover:text-accent transition-colors flex items-center justify-between"
+							aria-expanded="false"
+						>
+							<span>{item.label}</span>
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-accordion-chevron transition-transform">
+								<polyline points="6 9 12 15 18 9" />
+							</svg>
+						</button>
+						<div class="mobile-accordion-panel hidden pb-3 pl-1">
+							<a
+								href={item.groupHref}
+								class="block py-2 text-sm text-muted hover:text-ink transition-colors"
+							>
+								전체 보기 →
+							</a>
+							{item.children.map(child => (
+								<a
+									href={child.href}
+									class="block py-2 text-sm text-ink hover:text-accent transition-colors"
+								>
+									{child.label}
+									<span class="block text-xs text-muted mt-0.5">{child.desc}</span>
+								</a>
+							))}
+						</div>
+					</div>
+				) : (
+					<a
+						href={item.href}
+						class="py-3 text-base text-ink hover:text-accent transition-colors border-b border-border-warm last:border-b-0 block"
+					>
+						{item.label}
+					</a>
+				)
 			))}
-			<a 
-				href="/contact" 
+			<a
+				href="/contact"
 				class="mt-4 bg-cta text-white px-5 py-3 rounded-full text-sm text-center hover:bg-accent transition-colors"
 			>
 				예약 문의
@@ -173,6 +201,18 @@ const navItems = [
 		iconMenu?.classList.toggle('hidden');
 		iconClose?.classList.toggle('hidden');
 		toggle.setAttribute('aria-expanded', String(!isOpen));
+	});
+
+	// 모바일 아코디언
+	document.querySelectorAll<HTMLButtonElement>('.mobile-accordion-toggle').forEach(btn => {
+		btn.addEventListener('click', () => {
+			const panel = btn.nextElementSibling as HTMLElement | null;
+			const chevron = btn.querySelector('.mobile-accordion-chevron') as HTMLElement | null;
+			const isOpen = !panel?.classList.contains('hidden');
+			panel?.classList.toggle('hidden');
+			chevron?.style.setProperty('transform', isOpen ? 'rotate(0deg)' : 'rotate(180deg)');
+			btn.setAttribute('aria-expanded', String(!isOpen));
+		});
 	});
 
 	const header = document.getElementById('site-header');

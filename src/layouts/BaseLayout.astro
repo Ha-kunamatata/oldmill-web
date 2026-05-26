@@ -7,12 +7,46 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 interface Props {
 	title: string;
 	description?: string;
+	ogImage?: string;
 }
 
-const { 
-	title, 
-	description = "충남 아산의 가족 레스토랑, 올드밀. 돌잔치, 스몰웨딩, 피자체험을 위한 따뜻한 공간."
+const SITE_URL = 'https://oldmill-web.pages.dev';
+const DEFAULT_DESCRIPTION = '충남 아산의 가족 레스토랑, 올드밀. 돌잔치 · 스몰웨딩 · 칠팔순 · 피자체험을 위한 따뜻한 공간.';
+const DEFAULT_OG_IMAGE = '/images/hero/main.jpg';
+
+const {
+	title,
+	description = DEFAULT_DESCRIPTION,
+	ogImage = DEFAULT_OG_IMAGE,
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE_URL).toString();
+const ogImageUrl = new URL(ogImage, SITE_URL).toString();
+
+// Restaurant JSON-LD (구글·네이버 비즈니스 카드용)
+const restaurantSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Restaurant',
+	name: 'The Old Mill (올드밀)',
+	url: SITE_URL,
+	telephone: '+82-41-546-1080',
+	servesCuisine: ['Korean', 'Western', 'Family Dining'],
+	priceRange: '₩₩',
+	image: ogImageUrl,
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: '방축동 553-4',
+		addressLocality: '아산시',
+		addressRegion: '충청남도',
+		addressCountry: 'KR',
+	},
+	openingHoursSpecification: [{
+		'@type': 'OpeningHoursSpecification',
+		dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+		opens: '11:00',
+		closes: '21:30',
+	}],
+};
 ---
 
 <!DOCTYPE html>
@@ -21,10 +55,48 @@ const {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content={description} />
+		<meta name="theme-color" content="#FAF7F2" />
+		<title>{title}</title>
+
+		<link rel="canonical" href={canonical} />
+
+		<!-- Favicon / PWA -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="The Old Mill" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:type" content="website" />
-		<title>{title}</title>
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:locale" content="ko_KR" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+
+		<!-- Fonts: preconnect 후 swap 로딩 (렌더 차단 최소화) -->
+		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+		/>
+
+		<!-- Restaurant 스키마 -->
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(restaurantSchema)} />
 	</head>
 	<body class="bg-bg text-ink">
 		<Header />

@@ -75,12 +75,13 @@ const floors = [
 	</section>
 
 	<section class="w-full mb-24 md:mb-32 reveal">
-		<div class="aspect-[16/9] md:aspect-[21/9] bg-border-warm overflow-hidden">
-			<img 
-				src="/images/hero/main.jpg" 
+		<div class="aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+			<SmartImage
+				src="/images/hero/main.jpg"
 				alt="올드밀 외관"
-				class="img-fade w-full h-full object-cover"
-				onload="this.classList.add('is-loaded')"
+				aspectRatio="21/9"
+				rounded="none"
+				eager
 			/>
 		</div>
 	</section>
