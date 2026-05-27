@@ -1,4 +1,7 @@
 ---
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
+
 const navItems = [
 	{ label: '소개', href: '/about' },
 	{ label: '메뉴', href: '/menu' },
@@ -41,9 +44,9 @@ const navItems = [
 			{navItems.map(item => (
 				item.children ? (
 					<div class="dropdown-wrap">
-						<a 
+						<a
 							href={item.groupHref}
-							class="dropdown-trigger px-3 py-2 text-sm text-muted hover:text-ink transition-colors flex items-center gap-1"
+							class={`dropdown-trigger px-3 py-2 text-sm hover:text-ink transition-colors flex items-center gap-1 ${item.children?.some(c => isActive(c.href)) ? 'text-ink font-medium' : 'text-muted'}`}
 						>
 							{item.label}
 							<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-chevron transition-transform">
@@ -65,9 +68,9 @@ const navItems = [
 						</div>
 					</div>
 				) : (
-					<a 
-						href={item.href} 
-						class="px-3 py-2 text-sm text-muted hover:text-ink transition-colors"
+					<a
+						href={item.href}
+						class={`px-3 py-2 text-sm hover:text-ink transition-colors ${isActive(item.href!) ? 'text-ink font-medium' : 'text-muted'}`}
 					>
 						{item.label}
 					</a>

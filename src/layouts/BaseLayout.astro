@@ -9,6 +9,7 @@ interface Props {
 	title: string;
 	description?: string;
 	ogImage?: string;
+	preloadImage?: string;
 }
 
 const SITE_URL = 'https://oldmill-web.pages.dev';
@@ -19,6 +20,7 @@ const {
 	title,
 	description = DEFAULT_DESCRIPTION,
 	ogImage = DEFAULT_OG_IMAGE,
+	preloadImage,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE_URL).toString();
@@ -124,6 +126,10 @@ const restaurantSchema = {
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
 
+		{preloadImage && (
+			<link rel="preload" as="image" href={preloadImage} />
+		)}
+
 		<!-- Fonts: preconnect 후 swap 로딩 (렌더 차단 최소화) -->
 		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -145,6 +151,12 @@ const restaurantSchema = {
 
 		<!-- 페이지 전환 (Astro View Transitions) -->
 		<ClientRouter />
+
+		<noscript>
+			<style>
+				.reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+			</style>
+		</noscript>
 	</head>
 	<body class="bg-bg text-ink">
 		<a href="#main-content" class="skip-to-content">본문으로 건너뛰기</a>

@@ -1,5 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const popularPages = [
+	{ label: '돌잔치', href: '/events/doljanchi' },
+	{ label: '스몰웨딩', href: '/events/wedding' },
+	{ label: '메뉴', href: '/menu' },
+	{ label: '공간 안내', href: '/space' },
+	{ label: '문의', href: '/contact' },
+];
 ---
 
 <BaseLayout title="페이지를 찾을 수 없음 · THE OLD MILL">
@@ -8,12 +16,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		<h1 class="text-display mb-8">
 			길을 잃으셨나요?
 		</h1>
-		<p class="prose-body mb-12">
+		<p class="prose-body mb-10">
 			찾으시던 페이지가 없거나 이동되었습니다.
 		</p>
-		<div class="flex flex-col sm:flex-row gap-3 justify-center">
+		<div class="flex flex-col sm:flex-row gap-3 justify-center mb-16">
 			<a href="/" class="btn btn-cta"><span>처음으로 돌아가기</span></a>
 			<a href="/contact" class="btn btn-outline"><span>문의하기</span></a>
+		</div>
+
+		<div class="pt-10 border-t border-border-warm">
+			<p class="text-xs text-muted uppercase tracking-wider mb-6">이 페이지를 찾으셨나요?</p>
+			<div class="flex flex-wrap justify-center gap-2">
+				{popularPages.map(p => (
+					<a
+						href={p.href}
+						class="px-4 py-2 rounded-full border border-border-warm text-sm hover:border-accent hover:text-accent transition-colors"
+					>
+						{p.label}
+					</a>
+				))}
+			</div>
 		</div>
 	</section>
 </BaseLayout>

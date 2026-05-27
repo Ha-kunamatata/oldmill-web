@@ -500,3 +500,25 @@ body {
   font-weight: 500;
 }
 
+/* 인쇄 스타일 */
+@media print {
+  #site-header,
+  footer,
+  .btn-cta,
+  .btn-outline,
+  .btn-light,
+  .skip-to-content { display: none !important; }
+
+  body { background: white !important; color: black !important; font-size: 12pt; }
+
+  .reveal, .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  img { max-width: 100% !important; break-inside: avoid; }
+
+  a { color: inherit !important; text-decoration: none !important; }
+  a[href^="tel"]::after { content: " (" attr(href) ")"; font-size: 0.9em; }
+}
+
